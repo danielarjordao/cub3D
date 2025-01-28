@@ -4,6 +4,8 @@
 
 [Codificando a ENGINE do Wolfenstein 3d com RayCasting. Passo a Passo do Zero em JavaScript.](https://www.youtube.com/watch?v=J5K8qMCB-7o&list=PLLFRf_pkM7b6rBRoTOW64NKdltCLQNpW5)
 
+[O que são VETORES e como usar em PROGRAMAÇÃO? Introdução.](https://youtu.be/29LJ2TPIRYU?si=mEpQqjEbARq5uMPP)
+
 [Cub3D Tutorial - Using angles](https://medium.com/@afatir.ahmedfatir/cub3d-tutorial-af5dd31d2fcf)
 
 [42: A Comprehensive Guide to Cub3D](https://reactive.so/post/42-a-comprehensive-guide-to-cub3d/)

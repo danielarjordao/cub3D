@@ -30,7 +30,7 @@ OBJS=$(addprefix $(OBJ_PATH), $(OBJS_NAMES))
 INCLUDE=-I ./include
 RM=rm -f
 
-all: msg $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $?

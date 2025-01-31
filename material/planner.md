@@ -68,6 +68,7 @@ Liberar memória corretamente:
   - **utils/**: Funções auxiliares.
     - `init_data.c`: Configuração inicial do jogo.
     - `free_mem.c`: Liberação de memória.
+    - `utils.c`: Outras funções auxiliares.
   
   - **parsing/**: Carregamento e validação do mapa.
     - `parsing.c`: Lê e valida o mapa.

@@ -2,5 +2,5 @@
 
 void	handle_events(void)
 {
-	ft_printf(1, "Handling events\n");
+	ft_printf(1, "Handling events\n\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/02/02 17:37:59 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/02/15 18:29:08 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef enum msg_error
 /* ******************************* PARSING ********************************** */
 
 /* parsing.c */
-void	parsing(char *file);
+bool	parsing(char *file);
 
 /* ******************************** GAME ************************************ */
 
@@ -100,7 +100,6 @@ void	init_raycasting(void);
 /* free_mem.c */
 void	free_mem(void);
 
-/* utils.c */
-int	msg_error(t_error err, int ret);
+bool	msg_error(t_error err);
 
 #endif

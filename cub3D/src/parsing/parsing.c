@@ -1,8 +1,20 @@
 #include "../../includes/cub3d.h"
 
-void	parsing(char *file)
+bool	check_file_extension(char *file)
 {
-	(void)file;
+	int	len;
+
+	len = ft_strlen(file);
+	file += len - 4;
+	if (!file || len <= 4 || ft_strncmp(file, ".cub", 4) != 0)
+		return (false);
+	return (true);
+}
+
+bool	parsing(char *file)
+{
+	if (check_file_extension(file) == false)
+		return (msg_error(W_EXTENSION));
 	ft_printf(1, "Initiating parsing\n");
 	ft_printf(1, "		Checking file extension\n");
 	ft_printf(1, "		Opening file\n");
@@ -13,4 +25,5 @@ void	parsing(char *file)
 	init_map();
 	ft_printf(1, "		Saving map parameters\n");
 	ft_printf(1, "Parsing complete\n\n");
+	return (true);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/02/15 18:29:08 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/02/16 14:59:38 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ typedef struct s_ray
 typedef enum msg_error
 {
 	W_NBR_ARGS,
-	W_EXTENSION
+	W_EXTENSION,
+	W_OPEN
 }	t_error;
 
 /* ******************************* PARSING ********************************** */

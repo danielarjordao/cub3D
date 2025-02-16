@@ -7,5 +7,9 @@ bool	msg_error(t_error err)
 		ft_printf(2, "Wrong number of arguments\n");
 	else if (err == W_EXTENSION)
 		ft_printf(2, "Wrong file extension\n");
+	else if (err == W_OPEN)
+		ft_printf(2, "Could not open file\n");
+	else
+		ft_printf(2, "Unknown error\n");
 	return (false);
 }

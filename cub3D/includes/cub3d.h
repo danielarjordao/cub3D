@@ -64,15 +64,40 @@ typedef struct s_ray
 
 typedef enum msg_error
 {
+	MALLOC_FAIL,
 	W_NBR_ARGS,
-	W_EXTENSION,
-	W_OPEN
+	INVALID_EXT,
+	OPEN_FAIL,
+	TEX_OPEN_FAIL,
+	TEX_INVALID_EXT,
+	TEX_PATH_DUP
 }	t_error;
 
-/* ******************************* PARSING ********************************** */
+/* ******************************** PARSE *********************************** */
 
-/* parsing.c */
-bool	parsing(char *file);
+/* parse.c */
+bool	parse(char *file, t_map **map);
+bool	is_valid_extension(char *file, char *ext);
+bool	is_content_valid(int fd, t_map **map);
+bool	is_line_valid(char *line, t_map **map);
+
+/* parse_textures.c */
+bool	is_texture_valid(char *line, t_map **map);
+bool	is_path_valid(char *line, char c, t_map **map);
+bool	add_texture(char *line, char c, t_map **map);
+
+/* parse_colors.c */
+bool	is_color_valid(char *line, t_map **map);
+void	add_color(char *line, char c, t_map **map);
+
+/* parse_map.c */
+bool	is_map_valid(char *line, t_map **map);
+
+/* parse_utils.c */
+bool	is_space(char c);
+int		ignore_spaces(char *line);
+bool	is_empty_line(char *line);
+char	*ft_trim_spaces(char *line);
 
 /* ******************************** GAME ************************************ */
 
@@ -93,14 +118,16 @@ void	render(void);
 /* ******************************* UTILS *********************************** */
 
 /* init_data.c */
-void	init_map(void);
+bool	init_map(t_map **map);
 void	init_mlx(void);
 void	init_textures(void);
 void	init_raycasting(void);
 
 /* free_mem.c */
 void	free_mem(void);
+void	free_map(t_map *map);
 
+/* utils.c */
 bool	msg_error(t_error err);
 
 #endif

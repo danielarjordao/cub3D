@@ -6,7 +6,7 @@
 #    By: dramos-j <dramos-j@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/01/31 18:14:31 by dramos-j         ###   ########.fr        #
+#    Updated: 2025/02/18 17:37:22 by dramos-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,11 @@ SRCS = src/main.c \
 		src/utils/init_data.c \
 		src/utils/free_mem.c \
 		src/utils/utils.c \
-		src/parsing/parsing.c \
+		src/parse/parse.c \
+		src/parse/parse_map.c \
+		src/parse/parse_colors.c \
+		src/parse/parse_textures.c \
+		src/parse/parse_utils.c \
 		src/raycasting/raycasting.c \
 		src/raycasting/render.c \
 		src/game/start_game.c \

@@ -17,6 +17,10 @@ bool	msg_error(t_error err)
 		ft_printf(2, "Wrong texture extension\n");
 	else if (err == TEX_PATH_DUP)
 		ft_printf(2, "Texture path duplicated\n");
+	else if (err == COL_FORMAT_ERR)
+		ft_printf(2, "Wrong color format\n");
+	else if (err == COL_DUPLICATE)
+		ft_printf(2, "Color duplicated\n");
 	else
 		ft_printf(2, "Unknown error\n");
 	return (false);

@@ -15,6 +15,12 @@ bool	init_map(t_map **map)
 	(*map)->player_x = 0;
 	(*map)->player_y = 0;
 	(*map)->player_dir = 0;
+	(*map)->floor_color[0] = -1;
+	(*map)->floor_color[1] = -1;
+	(*map)->floor_color[2] = -1;
+	(*map)->ceiling_color[0] = -1;
+	(*map)->ceiling_color[1] = -1;
+	(*map)->ceiling_color[2] = -1;
 	return (true);
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dramos-j <dramos-j@student.42porto.com>    +#+  +:+       +#+         #
+#    By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/02/18 17:37:22 by dramos-j         ###   ########.fr        #
+#    Updated: 2025/02/25 13:55:29 by dramos-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS = src/main.c \
 		src/raycasting/raycasting.c \
 		src/raycasting/render.c \
 		src/game/start_game.c \
-		src/game/handle_events.c
+		src/game/handle_events.c \
+		src/parse/prints.c
 OBJS_DIR = objs
 OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
 RM = rm -rf

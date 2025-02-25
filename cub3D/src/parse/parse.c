@@ -14,6 +14,7 @@ bool	parse(char *file, t_map **map)
 		free_map(*map);
 		return (false);
 	}
+	print_map(*map);
 	return (true);
 }
 

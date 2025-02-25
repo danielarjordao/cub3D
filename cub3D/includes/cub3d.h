@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/02/16 14:59:38 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:38:16 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ typedef enum msg_error
 	OPEN_FAIL,
 	TEX_OPEN_FAIL,
 	TEX_INVALID_EXT,
-	TEX_PATH_DUP
+	TEX_PATH_DUP,
+	COL_FORMAT_ERR,
+	COL_DUPLICATE
 }	t_error;
 
 /* ******************************** PARSE *********************************** */
@@ -88,7 +90,7 @@ bool	add_texture(char *line, char c, t_map **map);
 
 /* parse_colors.c */
 bool	is_color_valid(char *line, t_map **map);
-void	add_color(char *line, char c, t_map **map);
+bool	add_color(char *line, char c, t_map **map);
 
 /* parse_map.c */
 bool	is_map_valid(char *line, t_map **map);
@@ -98,6 +100,8 @@ bool	is_space(char c);
 int		ignore_spaces(char *line);
 bool	is_empty_line(char *line);
 char	*ft_trim_spaces(char *line);
+
+void	print_map(t_map *map);
 
 /* ******************************** GAME ************************************ */
 

@@ -3,10 +3,8 @@
 bool	is_texture_valid(char *line, t_map **map)
 {
 	line += ignore_spaces(line);
-	if ((ft_strncmp(line, "NO", 2) == 0
-			|| ft_strncmp(line, "SO", 2) == 0
-			||ft_strncmp(line, "WE", 2) == 0
-			|| ft_strncmp(line, "EA", 2) == 0)
+	if ((!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
+			||!ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
 		&& is_path_valid(line + 2, line[0], map))
 		return (true);
 	else

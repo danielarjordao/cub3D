@@ -16,14 +16,13 @@ void	print_map(t_map *map)
 	if (map->ea_texture)
 	printf("East texture: %s\n", map->ea_texture);
 	i = 0;
-	while (map->floor_color[i])
+	while (i < 3)
 	{
-		printf("i: %d\n", i);
 		printf("Floor color: %d\n", map->floor_color[i]);
 		i++;
 	}
 	i = 0;
-	while (map->ceiling_color[i])
+	while (i < 3)
 	{
 		printf("Ceiling color: %d\n", map->ceiling_color[i]);
 		i++;

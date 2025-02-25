@@ -1,44 +1,58 @@
 #include "../../includes/cub3d.h"
 
+
 bool	is_color_valid(char *line, t_map **map)
 {
-	int	i;
+	char	**temp;
+	char	c;
 
-	i = ignore_spaces(line);
-	if (line[i] == 'F')
-		return (add_color(line + i + 1, 'F', map));
-	else if (line[i] == 'C')
-		return (add_color(line + i + 1, 'C', map));
+	line += ignore_spaces(line);
+	if (*line != 'F' && *line != 'C')
+		return (false);
+	else
+		c = *line;
+	line++;
+	temp = ft_split(line, ',');
+	if (!temp || !temp[0] || !temp[1] || !temp[2] || temp[3])
+	{
+		ft_free_matrix(temp);
+		return (msg_error(COL_FORMAT_ERR));
+	}
+	if (c == 'F')
+		return (add_color(temp, (*map)->floor_color));
+	else if (c == 'C')
+		return (add_color(temp, (*map)->ceiling_color));
 	else
 		return (false);
 }
+// checar esse teste: C  						 	0, 0,0 8
 
-bool	add_color(char *line, char c, t_map **map)
+bool	add_color(char **temp, int *color)
 {
-	char	*temp;
-	int		*color;
 	int		i;
 
-	if (c == 'C')
-		color = (*map)->ceiling_color;
-	else
-		color = (*map)->floor_color;
 	i = 0;
-	while (i < 3)
+	while (temp[i])
 	{
-		line += ignore_spaces(line);
 		if (color[i] != -1)
+		{
+			ft_free_matrix(temp);
 			return (msg_error(COL_DUPLICATE));
-		temp = ft_substr(line, 0, 3);
-		color[i] = ft_atoi(line);
-		if (color[i] < 0 || color[i] > 255)
+		}
+		if (is_empty_line(temp[i]))
+		{
+			ft_free_matrix(temp);
 			return (msg_error(COL_FORMAT_ERR));
-		line += ft_strlen(temp) + 1;
+		}
+		color[i] = ft_atoi(temp[i]);
+		if (color[i] < 0 || color[i] > 255)
+		{
+			printf("color[%d]: %d\n", i, color[i]);
+			ft_free_matrix(temp);
+			return (msg_error(COL_FORMAT_ERR));
+		}
 		i++;
-		free(temp);
 	}
-	line += ignore_spaces(line);
-	if (*line)
-		return (msg_error(COL_FORMAT_ERR));
+	ft_free_matrix(temp);
 	return (true);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/02/02 17:37:59 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:00:16 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@
 
 /* ******************************* STRUCTS ********************************** */
 
+
 typedef struct s_map
 {
 	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;
+	char	**map;
 	int		floor_color[3];
 	int		ceiling_color[3];
-	char	**map;
 	int		map_width;
 	int		map_height;
 	int		player_x;
@@ -36,7 +37,7 @@ typedef struct s_map
 
 typedef struct s_mlx
 {
-	void	*mlx;
+	void	*connection;
 	void	*win;
 	void	*img;
 	char	*addr;
@@ -55,6 +56,14 @@ typedef struct s_textures
 	void	*ea_texture;
 }	t_textures;
 
+typedef struct s_game
+{
+	t_map		*map;
+	t_mlx		*mlx;
+	t_textures*	textures;
+	t_mem_alloc	mem_alloc;
+}	t_game;
+
 typedef struct s_ray
 {
 	int		raycaster;
@@ -68,6 +77,15 @@ typedef enum msg_error
 	W_EXTENSION
 }	t_error;
 
+# define SCREEN_WIDTH 1800
+# define SCREEN_HEIGHT 900
+
+/* ******************************* INIT_FUNCTIONS *********************************** */
+
+/* init_data.c */
+void	init_game(t_game *game);
+void	init_map(void);
+
 /* ******************************* PARSING ********************************** */
 
 /* parsing.c */
@@ -76,7 +94,7 @@ void	parsing(char *file);
 /* ******************************** GAME ************************************ */
 
 /* start_game.c */
-void	start_game(void);
+void	start_game(t_game *game);
 
 /* handle_events.c */
 void	handle_events(void);
@@ -89,13 +107,13 @@ void	raycasting(void);
 /* render.c */
 void	render(void);
 
+
 /* ******************************* UTILS *********************************** */
 
-/* init_data.c */
-void	init_map(void);
-void	init_mlx(void);
-void	init_textures(void);
-void	init_raycasting(void);
+/* check_mem.c */
+void	check_mem(t_game *game, t_list **ptr_or_matrix_list, \
+	void *ptr, char *error_msg);
+void	destroy_free_exit_error(t_game *game, char *error_msg);
 
 /* free_mem.c */
 void	free_mem(void);

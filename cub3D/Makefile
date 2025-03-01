@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dramos-j <dramos-j@student.42porto.com>    +#+  +:+       +#+         #
+#    By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/01/31 18:14:31 by dramos-j         ###   ########.fr        #
+#    Updated: 2025/02/27 11:03:35 by mde-souz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ MLX_FLAGS = -L./lib/minilibx -lmlx -lX11 -lXext
 SRCS = src/main.c \
 		src/utils/init_data.c \
 		src/utils/free_mem.c \
+		src/utils/check_mem.c \
 		src/utils/utils.c \
 		src/parsing/parsing.c \
 		src/raycasting/raycasting.c \

@@ -4,7 +4,6 @@ bool	is_map_valid(char *line, t_map **map)
 {
 	int	i;
 
-	(void)map;
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
@@ -15,6 +14,29 @@ bool	is_map_valid(char *line, t_map **map)
 		}
 		i++;
 	}
-	printf("Map: %s\n", line);
+	add_map_line(line, map);
 	return (true);
+}
+
+void	add_map_line(char *line, t_map **map)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (!(*map)->map)
+	{
+		(*map)->map = ft_calloc(1, sizeof(char *) * 2);
+		(*map)->map[0] = ft_strdup(line);
+	}
+	else
+	{
+		while ((*map)->map[i])
+			i++;
+		(*map)->map = ft_realloc((*map)->map, i * sizeof(char *), (i + 2) * sizeof(char *));
+		(*map)->map[i] = ft_strdup(line);
+		(*map)->map[i + 1] = NULL;
+	}
+
 }

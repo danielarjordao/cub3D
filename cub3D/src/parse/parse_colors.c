@@ -25,7 +25,6 @@ bool	is_color_valid(char *line, t_map **map)
 	else
 		return (false);
 }
-// checar esse teste: C  						 	0, 0,0 8
 
 bool	add_color(char **temp, int *color)
 {
@@ -39,7 +38,7 @@ bool	add_color(char **temp, int *color)
 			ft_free_matrix(temp);
 			return (msg_error(COL_DUPLICATE));
 		}
-		if (is_empty_line(temp[i]))
+		if (!valid_number_format(temp[i]))
 		{
 			ft_free_matrix(temp);
 			return (msg_error(COL_FORMAT_ERR));
@@ -47,7 +46,6 @@ bool	add_color(char **temp, int *color)
 		color[i] = ft_atoi(temp[i]);
 		if (color[i] < 0 || color[i] > 255)
 		{
-			printf("color[%d]: %d\n", i, color[i]);
 			ft_free_matrix(temp);
 			return (msg_error(COL_FORMAT_ERR));
 		}
@@ -55,4 +53,21 @@ bool	add_color(char **temp, int *color)
 	}
 	ft_free_matrix(temp);
 	return (true);
+}
+
+bool	valid_number_format(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	while (str[i] && (ft_isdigit(str[i])))
+		i++;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '\0')
+		return (true);
+	else
+		return (false);
 }

@@ -34,6 +34,7 @@ void	print_map(t_map *map)
 		while (map->map[i])
 		{
 			j = 0;
+			printf("Line %d: ", i);
 			while (map->map[i][j])
 			{
 				printf("%c", map->map[i][j]);

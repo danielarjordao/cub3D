@@ -16,10 +16,6 @@ void	free_map(t_map *map)
 	if (map->ea_texture)
 		free(map->ea_texture);
 	if (map->map)
-	{
-		while (map->map)
-			free(map->map++);
-		free(map->map);
-	}
+		ft_free_matrix(map->map);
 	free(map);
 }

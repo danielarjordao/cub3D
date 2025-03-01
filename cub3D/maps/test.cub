@@ -1,6 +1,6 @@
 EA textures/path_to_the_east_texture.xpm
 
-C  						 	0, 0,0 8
+C  						 	0, 0,                       9 
 
 NO										 textures/path_to_the_north_texture.xpm
 WE textures/path_to_the_west_texture.xpm

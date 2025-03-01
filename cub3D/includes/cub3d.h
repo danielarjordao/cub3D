@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/02/25 17:34:17 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:04:33 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,11 @@ bool	add_texture(char *line, char c, t_map **map);
 /* parse_colors.c */
 bool	is_color_valid(char *line, t_map **map);
 bool	add_color(char **temp, int *color);
+bool	valid_number_format(char *str);
 
 /* parse_map.c */
 bool	is_map_valid(char *line, t_map **map);
+void	add_map_line(char *line, t_map **map);
 
 /* parse_utils.c */
 int		ignore_spaces(char *line);

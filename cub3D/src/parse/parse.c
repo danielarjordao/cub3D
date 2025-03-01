@@ -50,12 +50,18 @@ bool	is_content_valid(int fd, t_map **map)
 	close(fd);
 	return (true);
 }
+// Note: Nao esta retornando assim que encontra uma linha invalida, continua lendo o arquivo ate o final
 
 bool	is_line_valid(char *line, t_map **map)
 {
 	(void)map;
 	if (is_empty_line(line))
-		return (true);
+	{
+		if (map && (*map)->map)
+			return (msg_error(MAP_FORMAT_ERR));
+		else
+			return (true);
+	}
 	else if (is_texture_valid(line, map))
 		return (true);
 	else if (is_color_valid(line, map))

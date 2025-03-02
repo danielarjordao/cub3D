@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: dramos-j <dramos-j@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/02/25 13:55:29 by dramos-j         ###   ########.fr        #
+#    Updated: 2025/03/02 14:25:32 by dramos-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ MLX_FLAGS = -L./lib/minilibx -lmlx -lX11 -lXext
 SRCS = src/main.c \
 		src/utils/init_data.c \
 		src/utils/free_mem.c \
+		src/utils/check_mem.c \
 		src/utils/utils.c \
 		src/parse/parse.c \
 		src/parse/parse_map.c \

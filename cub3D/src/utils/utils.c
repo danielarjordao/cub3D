@@ -21,7 +21,13 @@ bool	msg_error(t_error err)
 		ft_printf(2, "Wrong color format\n");
 	else if (err == COL_DUPLICATE)
 		ft_printf(2, "Color duplicated\n");
+	else if (err == MISSING_INFO)
+		ft_printf(2, "Missing information\n");
+	else if (err == MAP_FORMAT_ERR)
+		ft_printf(2, "Map format error\n");
+	else if (err == MAP_INVALID_CHAR)
+		ft_printf(2, "Invalid character in map\n");
 	else
-		ft_printf(2, "Unknown error\n");
+		ft_printf(2, "Unknown error %d\n", err);
 	return (false);
 }

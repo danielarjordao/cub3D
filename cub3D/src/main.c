@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:44:44 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/01 15:05:40 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/02 14:23:25 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 int	main(int argc, char **argv)
 {
-	t_map	*map;
+	t_game	game;
 
 	if (argc != 2)
 		return (msg_error(W_NBR_ARGS));
-	if (!parse(argv[1], &map))
+	if (!parse(argv[1], &game.map))
 		return (1);
-//	start_game();
-//	free_mem();
-	free_map(map);
+	start_game(&game);
+	free_map(game.map);
 	return (0);
 }

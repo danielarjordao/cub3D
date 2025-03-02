@@ -39,15 +39,6 @@ bool	are_colors_and_textures_set(t_map **map)
 	return (true);
 }
 
-bool	are_colors_and_textures_set(t_map **map)
-{
-	if (!(*map)->no_texture || !(*map)->so_texture || !(*map)->we_texture
-		|| !(*map)->ea_texture || (*map)->floor_color[0] == -1
-		|| (*map)->ceiling_color[0] == -1)
-		return (false);
-	return (true);
-}
-
 void	add_map_line(char *line, t_map **map)
 {
 	int		i;

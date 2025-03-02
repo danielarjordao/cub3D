@@ -90,10 +90,6 @@ typedef enum msg_error
 	MISSING_INFO,
 	MAP_FORMAT_ERR,
 	MAP_INVALID_CHAR
-	COL_DUPLICATE,
-	MISSING_INFO,
-	MAP_FORMAT_ERR,
-	MAP_INVALID_CHAR
 }	t_error;
 
 /* ******************************* INIT_FUNCTIONS *********************************** */

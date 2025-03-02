@@ -28,6 +28,8 @@ typedef struct s_map
 	int		ceiling_color[3];
 	int		floor_color_hex;
 	int		ceiling_color_hex;
+	int		floor_color_hex;
+	int		ceiling_color_hex;
 	char	**map;
 	int		map_width;
 	int		map_height;
@@ -89,6 +91,10 @@ typedef enum msg_error
 	MISSING_INFO,
 	MAP_FORMAT_ERR,
 	MAP_INVALID_CHAR
+	COL_DUPLICATE,
+	MISSING_INFO,
+	MAP_FORMAT_ERR,
+	MAP_INVALID_CHAR
 }	t_error;
 
 /* *************************** INIT_FUNCTIONS ******************************* */
@@ -116,11 +122,14 @@ bool	add_texture(char *line, char c, t_map **map);
 /* parse_colors.c */
 bool	is_color_valid(char *line, t_map **map);
 bool	add_color(char **temp, int *color, t_map **map);
+bool	add_color(char **temp, int *color, t_map **map);
 bool	valid_number_format(char *str);
+void	convert_rgb_to_hex(int *color, t_map **map);
 void	convert_rgb_to_hex(int *color, t_map **map);
 
 /* parse_map.c */
 bool	is_map_valid(char *line, t_map **map);
+bool	are_colors_and_textures_set(t_map **map);
 bool	are_colors_and_textures_set(t_map **map);
 void	add_map_line(char *line, t_map **map);
 

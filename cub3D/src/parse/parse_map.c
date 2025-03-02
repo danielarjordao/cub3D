@@ -7,6 +7,8 @@ bool	is_map_valid(char *line, t_map **map)
 	i = 0;
 	if (!are_colors_and_textures_set(map))
 		return (msg_error(MISSING_INFO));
+	if (!are_colors_and_textures_set(map))
+		return (msg_error(MISSING_INFO));
 	while (line[i] && line[i] != '\n')
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
@@ -25,6 +27,15 @@ bool	is_map_valid(char *line, t_map **map)
 		i++;
 	}
 	add_map_line(line, map);
+	return (true);
+}
+
+bool	are_colors_and_textures_set(t_map **map)
+{
+	if (!(*map)->no_texture || !(*map)->so_texture || !(*map)->we_texture
+		|| !(*map)->ea_texture || (*map)->floor_color[0] == -1
+		|| (*map)->ceiling_color[0] == -1)
+		return (false);
 	return (true);
 }
 

@@ -50,6 +50,7 @@ bool	is_content_valid(int fd, t_map **map)
 	close(fd);
 	return (true);
 }
+// Note: Nao esta retornando assim que encontra uma linha invalida, continua lendo o arquivo ate o final
 
 bool	is_line_valid(char *line, t_map **map)
 {

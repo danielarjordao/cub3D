@@ -18,19 +18,18 @@
 
 /* ******************************* STRUCTS ********************************** */
 
+
 typedef struct s_map
 {
 	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;
+	char	**map;
 	int		floor_color[3];
 	int		ceiling_color[3];
 	int		floor_color_hex;
 	int		ceiling_color_hex;
-	int		floor_color_hex;
-	int		ceiling_color_hex;
-	char	**map;
 	int		map_width;
 	int		map_height;
 	int		player_x;
@@ -97,7 +96,7 @@ typedef enum msg_error
 	MAP_INVALID_CHAR
 }	t_error;
 
-/* *************************** INIT_FUNCTIONS ******************************* */
+/* ******************************* INIT_FUNCTIONS *********************************** */
 
 /* init_data.c */
 bool	init_map(t_map **map);
@@ -155,6 +154,7 @@ void	raycasting(void);
 
 /* render.c */
 void	render(void);
+
 
 /* ******************************* UTILS *********************************** */
 

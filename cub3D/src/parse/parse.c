@@ -50,7 +50,6 @@ bool	is_content_valid(int fd, t_map **map)
 	close(fd);
 	return (true);
 }
-// Note: Nao esta retornando assim que encontra uma linha invalida, continua lendo o arquivo ate o final
 
 bool	is_line_valid(char *line, t_map **map)
 {
@@ -62,10 +61,10 @@ bool	is_line_valid(char *line, t_map **map)
 		else
 			return (true);
 	}
-	else if (is_texture_valid(line, map))
-		return (true);
-	else if (is_color_valid(line, map))
-		return (true);
+	else if (is_a_texture(line))
+		return (is_texture_valid(line, map));
+	else if (is_a_color(line))
+		return (is_color_valid(line, map));
 	else if (is_map_valid(line, map))
 		return (true);
 	else

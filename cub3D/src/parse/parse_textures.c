@@ -1,21 +1,23 @@
 #include "../../includes/cub3d.h"
 
-bool	is_texture_valid(char *line, t_map **map)
+bool	is_a_texture(char *line)
 {
 	line += ignore_spaces(line);
 	if ((!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
-			||!ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
-		&& is_path_valid(line + 2, line[0], map))
+		|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
+		&& ft_isspace(line[2]))
 		return (true);
 	else
 		return (false);
 }
-
-bool	is_path_valid(char *line, char c, t_map **map)
+bool	is_texture_valid(char *line, t_map **map)
 {
 	int		fd;
 	char	*path;
+	char	c;
 
+	c = *line;
+	line += 2;
 	path = ft_trim_spaces(line);
 	if (!path || !is_valid_extension(path, ".xpm"))
 	{

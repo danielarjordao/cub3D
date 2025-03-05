@@ -1,15 +1,20 @@
 #include "../../includes/cub3d.h"
 
+bool	is_a_color(char *line)
+{
+	line += ignore_spaces(line);
+	if ((line[0] == 'F' || line[0] == 'C') && ft_isspace(line[1]))
+		return (true);
+	else
+		return (false);
+}
+
 bool	is_color_valid(char *line, t_map **map)
 {
 	char	**temp;
 	char	c;
 
-	line += ignore_spaces(line);
-	if (*line != 'F' && *line != 'C')
-		return (false);
-	else
-		c = *line;
+	c = *line;
 	line++;
 	temp = ft_split(line, ',');
 	if (!temp || !temp[0] || !temp[1] || !temp[2] || temp[3])

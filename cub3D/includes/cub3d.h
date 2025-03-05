@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/02 14:41:50 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/05 16:31:16 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,16 +110,16 @@ bool	is_content_valid(int fd, t_map **map);
 bool	is_line_valid(char *line, t_map **map);
 
 /* parse_textures.c */
+bool	is_a_texture(char *line);
 bool	is_texture_valid(char *line, t_map **map);
 bool	is_path_valid(char *line, char c, t_map **map);
 bool	add_texture(char *line, char c, t_map **map);
 
 /* parse_colors.c */
+bool	is_a_color(char *line);
 bool	is_color_valid(char *line, t_map **map);
 bool	add_color(char **temp, int *color, t_map **map);
-bool	add_color(char **temp, int *color, t_map **map);
 bool	valid_number_format(char *str);
-void	convert_rgb_to_hex(int *color, t_map **map);
 void	convert_rgb_to_hex(int *color, t_map **map);
 
 /* parse_map.c */

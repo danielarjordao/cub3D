@@ -8,7 +8,6 @@ void	print_map(t_map *map)
 	if (!map)
 		return ;
 	printf("PRINTING MAP\n\n");
-	printf("PRINTING MAP\n\n");
 	if (map->no_texture)
 		printf("North texture: %s\n", map->no_texture);
 	if (map->so_texture)

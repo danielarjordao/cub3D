@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/05 16:58:31 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/07 13:55:41 by daniela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ typedef enum msg_error
 	COL_DUPLICATE,
 	MISSING_INFO,
 	MAP_FORMAT_ERR,
-	MAP_INVALID_CHAR
+	MAP_INVALID_CHAR,
+	MAP_PLAYER_DUP,
+	MAP_BORDER_ERR
 }	t_error;
 
 /* ******************************* INIT_FUNCTIONS *********************************** */
@@ -124,8 +126,12 @@ void	convert_rgb_to_hex(int *color, t_map **map);
 /* parse_map.c */
 bool	is_map_valid(char *line, t_map **map);
 bool	are_colors_and_textures_set(t_map **map);
-bool	are_colors_and_textures_set(t_map **map);
 void	add_map_line(char *line, t_map **map);
+bool	check_borders(t_map *map);
+bool	check_borders_line(t_map *map);
+bool	check_line(t_map *map, int *x, int y);
+bool	check_borders_column(t_map *map);
+bool	check_column(t_map *map, int x, int *y);
 
 /* parse_utils.c */
 int		ignore_spaces(char *line);

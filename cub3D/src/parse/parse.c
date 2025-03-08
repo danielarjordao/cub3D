@@ -9,7 +9,7 @@ bool	parse(char *file, t_map **map)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (msg_error(OPEN_FAIL));
-	if (!init_map(map) || !is_content_valid(fd, map))
+	if (!init_map(map) || !is_content_valid(fd, map) || !check_content(*map))
 	{
 		free_map(*map);
 		return (false);
@@ -34,6 +34,8 @@ bool	is_content_valid(int fd, t_map **map)
 	char	*line;
 
 	line = get_next_line(fd);
+	if (!line)
+		return (msg_error(MISSING_INFO));
 	while (line)
 	{
 		if (!is_line_valid(line, map))
@@ -53,14 +55,8 @@ bool	is_content_valid(int fd, t_map **map)
 
 bool	is_line_valid(char *line, t_map **map)
 {
-	(void)map;
-	if (is_empty_line(line))
-	{
-		if (map && (*map)->map)
-			return (msg_error(MAP_FORMAT_ERR));
-		else
-			return (true);
-	}
+	if (is_empty_line(line) && !(*map)->map)
+		return (true);
 	else if (is_a_texture(line))
 		return (is_texture_valid(line, map));
 	else if (is_a_color(line))
@@ -69,4 +65,5 @@ bool	is_line_valid(char *line, t_map **map)
 		return (true);
 	else
 		return (false);
+	return (true);
 }

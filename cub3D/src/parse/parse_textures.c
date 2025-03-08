@@ -16,10 +16,13 @@ bool	is_texture_valid(char *line, t_map **map)
 	char	*path;
 	char	c;
 
+	line += ignore_spaces(line);
 	c = *line;
 	line += 2;
 	path = ft_trim_spaces(line);
-	if (!path || !is_valid_extension(path, ".xpm"))
+	if (!path)
+		return (msg_error(MISSING_INFO));
+	if (!is_valid_extension(path, ".xpm"))
 	{
 		free(path);
 		return (msg_error(TEX_INVALID_EXT));

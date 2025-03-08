@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/07 13:55:41 by daniela          ###   ########.fr       */
+/*   Updated: 2025/03/08 15:51:44 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef enum msg_error
 	MAP_FORMAT_ERR,
 	MAP_INVALID_CHAR,
 	MAP_PLAYER_DUP,
+	MAP_NO_PLAYER,
 	MAP_BORDER_ERR
 }	t_error;
 
@@ -127,6 +128,7 @@ void	convert_rgb_to_hex(int *color, t_map **map);
 bool	is_map_valid(char *line, t_map **map);
 bool	are_colors_and_textures_set(t_map **map);
 void	add_map_line(char *line, t_map **map);
+bool	check_content(t_map *map);
 bool	check_borders(t_map *map);
 bool	check_borders_line(t_map *map);
 bool	check_line(t_map *map, int *x, int y);

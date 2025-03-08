@@ -29,6 +29,8 @@ bool	msg_error(t_error err)
 		ft_printf(2, "Invalid character in map\n");
 	else if (err == MAP_PLAYER_DUP)
 		ft_printf(2, "Player duplicated\n");
+	else if (err == MAP_NO_PLAYER)
+		ft_printf(2, "No player found\n");
 	else if (err == MAP_BORDER_ERR)
 		ft_printf(2, "Map border error\n");
 	else

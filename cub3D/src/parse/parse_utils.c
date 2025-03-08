@@ -5,7 +5,7 @@ int	ignore_spaces(char *line)
 	int	i;
 
 	i = 0;
-	while (ft_isspace(line[i]))
+	while (line[i] && ft_isspace(line[i]))
 		i++;
 	return (i);
 }
@@ -27,8 +27,10 @@ bool	is_empty_line(char *line)
 {
 	int	i;
 
+	if (!line)
+		return (true);
 	i = ignore_spaces(line);
-	if (line[i] == '\0')
+	if (!line[i])
 		return (true);
 	else
 		return (false);

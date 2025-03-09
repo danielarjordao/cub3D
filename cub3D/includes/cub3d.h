@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/08 15:51:44 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:29:28 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,9 @@ bool	is_map_valid(char *line, t_map **map);
 bool	are_colors_and_textures_set(t_map **map);
 void	add_map_line(char *line, t_map **map);
 bool	check_content(t_map *map);
+void	add_space_to_map(t_map *map);
+
+/* parse_map2.c */
 bool	check_borders(t_map *map);
 bool	check_borders_line(t_map *map);
 bool	check_line(t_map *map, int *x, int y);
@@ -139,7 +142,10 @@ bool	check_column(t_map *map, int x, int *y);
 int		ignore_spaces(char *line);
 bool	is_empty_line(char *line);
 char	*ft_trim_spaces(char *line);
+bool	check_empty_lines_in_map(t_map *map);
+char	*ft_add_space_end(t_map *map, char *new_line, int i);
 
+/* print.c */
 void	print_map(t_map *map);
 
 /* ******************************** GAME ************************************ */
@@ -172,5 +178,6 @@ void	free_map(t_map *map);
 
 /* utils.c */
 bool	msg_error(t_error err);
+bool	msg_error2(t_error err);
 
 #endif

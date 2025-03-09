@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_colors.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/09 16:26:32 by dramos-j          #+#    #+#             */
+/*   Updated: 2025/03/09 16:26:33 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 bool	is_a_color(char *line)
@@ -76,8 +88,8 @@ void	convert_rgb_to_hex(int *color, t_map **map)
 {
 	if (color == (*map)->floor_color)
 		(*map)->floor_color_hex = (color[0] << 16)
-		+ (color[1] << 8) + color[2];
+			+ (color[1] << 8) + color[2];
 	else if (color == (*map)->ceiling_color)
 		(*map)->ceiling_color_hex = (color[0] << 16)
-		+ (color[1] << 8) + color[2];
+			+ (color[1] << 8) + color[2];
 }

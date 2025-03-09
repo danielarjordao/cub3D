@@ -1,15 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_textures.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/09 16:27:07 by dramos-j          #+#    #+#             */
+/*   Updated: 2025/03/09 16:27:08 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 bool	is_a_texture(char *line)
 {
 	line += ignore_spaces(line);
 	if ((!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
-		|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
+			|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
 		&& ft_isspace(line[2]))
 		return (true);
 	else
 		return (false);
 }
+
 bool	is_texture_valid(char *line, t_map **map)
 {
 	int		fd;

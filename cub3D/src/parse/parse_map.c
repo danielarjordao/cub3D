@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:26:56 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/09 16:26:57 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:47:52 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,16 @@ void	add_map_line(char *line, t_map **map)
 
 bool	check_content(t_map *map)
 {
+	if (!map->map)
+		return (msg_error(MISSING_INFO));
 	if (check_empty_lines_in_map(map))
 		return (msg_error(MAP_FORMAT_ERR));
 	if (!map->player_dir)
 		return (msg_error(MAP_NO_PLAYER));
 	add_space_to_map(map);
-	if (!check_borders(map))
+	if (!check_borders_line(map))
+		return (false);
+	if (!check_borders_column(map))
 		return (false);
 	return (true);
 }

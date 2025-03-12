@@ -6,19 +6,28 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:27:03 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/09 16:27:04 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/12 18:29:20 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-bool	check_borders(t_map *map)
+char	*ft_add_space_end(t_map *map, char *new_line, int i)
 {
-	if (!check_borders_line(map))
-		return (false);
-	if (!check_borders_column(map))
-		return (false);
-	return (true);
+	int	j;
+
+	j = 0;
+	while (j < (int)ft_strlen(map->map[i]))
+	{
+		if (map->map[i][j])
+			new_line[j] = map->map[i][j];
+		else
+			new_line[j] = ' ';
+		j++;
+	}
+	new_line[j - 1] = '\n';
+	new_line[j] = '\0';
+	return (new_line);
 }
 
 bool	check_borders_line(t_map *map)

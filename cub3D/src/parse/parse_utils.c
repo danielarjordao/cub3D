@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:27:12 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/09 16:27:13 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:56:05 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,41 +48,42 @@ bool	is_empty_line(char *line)
 		return (false);
 }
 
-char	*ft_add_space_end(t_map *map, char *new_line, int i)
-{
-	int	j;
-
-	j = 0;
-	while (j < (int)ft_strlen(map->map[i]))
-	{
-		if (map->map[i][j])
-			new_line[j] = map->map[i][j];
-		else
-			new_line[j] = ' ';
-		j++;
-	}
-	new_line[j - 1] = '\n';
-	new_line[j] = '\0';
-	return (new_line);
-}
-
 bool	check_empty_lines_in_map(t_map *map)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (map->map[i])
 	{
 		if (is_empty_line(map->map[i]))
 		{
+			j = i;
 			while (map->map[i] && is_empty_line(map->map[i]))
 				i++;
 			if (!map->map[i])
+			{
+				clean_extra_empty_lines(map, j);
 				return (false);
+			}
 			else
 				return (true);
 		}
 		i++;
 	}
 	return (false);
+}
+
+void	clean_extra_empty_lines(t_map *map, int i)
+{
+	int	j;
+
+	j = i;
+	while (map->map[j])
+	{
+		free(map->map[j]);
+		map->map[j] = NULL;
+		j++;
+	}
+	map->map_height = i;
 }

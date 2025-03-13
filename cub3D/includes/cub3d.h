@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/02/27 11:00:16 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:03:01 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_mlx
 {
 	void	*connection;
 	void	*win;
-	void	*img;
+	void	*img_to_render;
 	char	*addr;
 	int		bpp;
 	int		size_line;
@@ -77,8 +77,8 @@ typedef enum msg_error
 	W_EXTENSION
 }	t_error;
 
-# define SCREEN_WIDTH 1800
-# define SCREEN_HEIGHT 900
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 600
 
 /* ******************************* INIT_FUNCTIONS *********************************** */
 
@@ -102,10 +102,10 @@ void	handle_events(void);
 /* ****************************** RAYCASTING ******************************** */
 
 /* raycasting.c */
-void	raycasting(void);
+void	raycasting(t_game *game);
 
 /* render.c */
-void	render(void);
+void	render(t_game *game);
 
 
 /* ******************************* UTILS *********************************** */

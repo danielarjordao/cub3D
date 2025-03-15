@@ -30,8 +30,12 @@ void	init_variables_game(t_game *game)
 	game->mem_alloc.ptr_mem_list = NULL;
 	game->mem_alloc.matrix_mem_list = NULL;
 	game->mlx = ft_calloc(1, sizeof(t_mlx));
+	check_mem(game, &(game->mem_alloc.ptr_mem_list), game->mlx, "ft_calloc failed");
 	game->mlx->connection = NULL;
 	game->mlx->win = NULL;
+	game->mlx->img_to_render = NULL;
+	game->mlx->addr = NULL;
+
 }
 
 void	init_mlx(t_game *game)
@@ -44,6 +48,15 @@ void	init_mlx(t_game *game)
 		SCREEN_HEIGHT, "Cub3D");
 	if (!(game->mlx->win))
 		destroy_free_exit_error(game, "mlx_new_window failed");
+	game->mlx->img_to_render = mlx_new_image(game->mlx->connection, \
+		SCREEN_WIDTH, SCREEN_HEIGHT);
+	if (!(game->mlx->img_to_render))
+		destroy_free_exit_error(game, "mlx_new_image failed");
+	game->mlx->addr = mlx_get_data_addr(game->mlx->img_to_render, \
+		&(game->mlx->bpp), &(game->mlx->size_line), &(game->mlx->endian));
+	if (!(game->mlx->addr))
+		destroy_free_exit_error(game, "mlx_get_data_addr failed");
+	//REVIEW -> memoria verificada ate esse ponto
 	//game->img_grass = NULL;
 }
 
@@ -61,12 +74,6 @@ void	init_textures(t_game *game)
 	|| game->img_exit == NULL)
 	destroy_free_exit_error(game, \
 	"mlx_xpm_file_to_image() in init_images failed"); */
-}
-
-void	init_raycasting(t_game *game)
-{
-	ft_printf(1, "		Initializing raycasting\n");
-	(void)game;
 }
 
 void	init_game(t_game *game)

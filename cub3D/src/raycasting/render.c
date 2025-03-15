@@ -2,13 +2,6 @@
 
 void	render(t_game *game)
 {
-	game->mlx->img_to_render = mlx_new_image(game->mlx->connection, \
-		SCREEN_WIDTH, SCREEN_HEIGHT);
-	
-	game->mlx->addr = mlx_get_data_addr(game->mlx->img_to_render, \
-		&(game->mlx->bpp), &(game->mlx->size_line), &(game->mlx->endian));
-
-
 	ft_printf(1, "Rendering\n");
 	ft_printf(1, "		Drawing ceiling and floor\n");
 	int	x_screen;
@@ -25,9 +18,9 @@ void	render(t_game *game)
 			if (x_screen != 0)
 				pixel_ptr++;
 			if (y_screen < SCREEN_HEIGHT / 2)
-				*pixel_ptr = 0x000000;
+				*pixel_ptr = game->map->floor_color_hex;
 			else
-				*pixel_ptr = 0xFFFFFF;
+				*pixel_ptr = game->map->ceiling_color_hex;
 			x_screen++;
 		}
 		y_screen++;

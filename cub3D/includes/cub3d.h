@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/15 17:33:07 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:57:29 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ typedef struct s_map
 	int		player_x;
 	int		player_y;
 	char	player_dir;
+	float	player_dir_x;
+	float	player_dir_y;
+	float	camera_x;
+	float	camera_y;
 }	t_map;
 
 typedef struct s_mlx
@@ -75,6 +79,7 @@ typedef struct s_ray
 
 # define SCREEN_WIDTH 1800
 # define SCREEN_HEIGHT 900
+# define CAMERA_MAGNITUDE 0.66
 
 typedef enum msg_error
 {

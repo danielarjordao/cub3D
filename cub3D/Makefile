@@ -6,7 +6,7 @@
 #    By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/03/02 14:25:32 by dramos-j         ###   ########.fr        #
+#    Updated: 2025/03/15 19:22:43 by mde-souz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -L./lib/minilibx -lmlx -lX11 -lXext
 SRCS = src/main.c \
 		src/utils/init_data.c \
+		src/utils/init_data2.c \
 		src/utils/free_mem.c \
 		src/utils/check_mem.c \
 		src/utils/utils.c \

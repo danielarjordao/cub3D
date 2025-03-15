@@ -21,7 +21,9 @@ static void	call_destroy_functions(t_game *game)
 	//if_not_null_destroy(game, game->image);
 
 	if (game->mlx->win != NULL)
-		mlx_destroy_window(game->mlx, game->mlx->win);
+		mlx_destroy_image(game->mlx->connection, game->mlx->img_to_render);
+	if (game->mlx->win != NULL)
+		mlx_destroy_window(game->mlx->connection, game->mlx->win);
 	if (game->mlx->connection != NULL)
 		mlx_destroy_display(game->mlx->connection);
 }

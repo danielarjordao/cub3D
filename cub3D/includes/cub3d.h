@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/13 20:03:01 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/03/15 17:33:07 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_map
 	char	**map;
 	int		floor_color[3];
 	int		ceiling_color[3];
+	int		floor_color_hex;
+	int		ceiling_color_hex;
 	int		map_width;
 	int		map_height;
 	int		player_x;
@@ -71,25 +73,67 @@ typedef struct s_ray
 
 /* ******************************* DEFINES ********************************** */
 
+# define SCREEN_WIDTH 1800
+# define SCREEN_HEIGHT 900
+
 typedef enum msg_error
 {
+	MALLOC_FAIL,
 	W_NBR_ARGS,
-	W_EXTENSION
+	INVALID_EXT,
+	OPEN_FAIL,
+	TEX_OPEN_FAIL,
+	TEX_INVALID_EXT,
+	TEX_PATH_DUP,
+	COL_FORMAT_ERR,
+	COL_DUPLICATE,
+	MISSING_INFO,
+	MAP_FORMAT_ERR,
+	MAP_INVALID_CHAR
 }	t_error;
-
-# define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 600
 
 /* ******************************* INIT_FUNCTIONS *********************************** */
 
 /* init_data.c */
+bool	init_map(t_map **map);
 void	init_game(t_game *game);
-void	init_map(void);
+void	init_mlx(t_game *game);
+void	init_textures(t_game *game);
+void	init_raycasting(t_game *game);
 
-/* ******************************* PARSING ********************************** */
+/* ******************************** PARSE *********************************** */
 
-/* parsing.c */
-void	parsing(char *file);
+/* parse.c */
+bool	parse(char *file, t_map **map);
+bool	is_valid_extension(char *file, char *ext);
+bool	is_content_valid(int fd, t_map **map);
+bool	is_line_valid(char *line, t_map **map);
+
+/* parse_textures.c */
+bool	is_texture_valid(char *line, t_map **map);
+bool	is_path_valid(char *line, char c, t_map **map);
+bool	add_texture(char *line, char c, t_map **map);
+
+/* parse_colors.c */
+bool	is_color_valid(char *line, t_map **map);
+bool	add_color(char **temp, int *color, t_map **map);
+bool	add_color(char **temp, int *color, t_map **map);
+bool	valid_number_format(char *str);
+void	convert_rgb_to_hex(int *color, t_map **map);
+void	convert_rgb_to_hex(int *color, t_map **map);
+
+/* parse_map.c */
+bool	is_map_valid(char *line, t_map **map);
+bool	are_colors_and_textures_set(t_map **map);
+bool	are_colors_and_textures_set(t_map **map);
+void	add_map_line(char *line, t_map **map);
+
+/* parse_utils.c */
+int		ignore_spaces(char *line);
+bool	is_empty_line(char *line);
+char	*ft_trim_spaces(char *line);
+
+void	print_map(t_map *map);
 
 /* ******************************** GAME ************************************ */
 
@@ -117,8 +161,9 @@ void	destroy_free_exit_error(t_game *game, char *error_msg);
 
 /* free_mem.c */
 void	free_mem(void);
+void	free_map(t_map *map);
 
 /* utils.c */
-int	msg_error(t_error err, int ret);
+bool	msg_error(t_error err);
 
 #endif

@@ -1,4 +1,28 @@
-# include "../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
+
+bool	init_map(t_map **map)
+{
+	*map = (t_map *)malloc(sizeof(t_map));
+	if (!*map)
+		return (MALLOC_FAIL);
+	(*map)->no_texture = NULL;
+	(*map)->so_texture = NULL;
+	(*map)->we_texture = NULL;
+	(*map)->ea_texture = NULL;
+	(*map)->map = NULL;
+	(*map)->map_width = 0;
+	(*map)->map_height = 0;
+	(*map)->player_x = 0;
+	(*map)->player_y = 0;
+	(*map)->player_dir = 0;
+	(*map)->floor_color[0] = -1;
+	(*map)->floor_color[1] = -1;
+	(*map)->floor_color[2] = -1;
+	(*map)->ceiling_color[0] = -1;
+	(*map)->ceiling_color[1] = -1;
+	(*map)->ceiling_color[2] = -1;
+	return (true);
+}
 
 void	init_variables_game(t_game *game)
 {
@@ -11,7 +35,7 @@ void	init_variables_game(t_game *game)
 }
 
 void	init_mlx(t_game *game)
-{	
+{
 	ft_printf(1, "		Initializing mlx\n");
 	game->mlx->connection = mlx_init();
 	check_mem(game, &(game->mem_alloc.ptr_mem_list), \
@@ -53,8 +77,3 @@ void	init_game(t_game *game)
 	init_textures(game);
 	init_raycasting(game);
 }
-
-void	init_map(void)
-{
-	ft_printf(1, "		Initializing map\n");
-};

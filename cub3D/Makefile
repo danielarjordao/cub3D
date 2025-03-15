@@ -6,7 +6,7 @@
 #    By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/02/27 11:03:35 by mde-souz         ###   ########.fr        #
+#    Updated: 2025/03/02 14:25:32 by dramos-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,16 @@ SRCS = src/main.c \
 		src/utils/free_mem.c \
 		src/utils/check_mem.c \
 		src/utils/utils.c \
-		src/parsing/parsing.c \
+		src/parse/parse.c \
+		src/parse/parse_map.c \
+		src/parse/parse_colors.c \
+		src/parse/parse_textures.c \
+		src/parse/parse_utils.c \
 		src/raycasting/raycasting.c \
 		src/raycasting/render.c \
 		src/game/start_game.c \
-		src/game/handle_events.c
+		src/game/handle_events.c \
+		src/parse/prints.c
 OBJS_DIR = objs
 OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
 RM = rm -rf

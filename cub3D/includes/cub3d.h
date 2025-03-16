@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/15 19:57:29 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/03/16 18:22:58 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ typedef struct s_map
 	int		ceiling_color_hex;
 	int		map_width;
 	int		map_height;
-	int		player_x;
-	int		player_y;
+	float		player_x;
+	float		player_y;
 	char	player_dir;
 	float	player_dir_x;
 	float	player_dir_y;
 	float	camera_x;
 	float	camera_y;
+	int	ray_x_direction;
+	int	ray_y_direction;
 }	t_map;
 
 typedef struct s_mlx
@@ -73,6 +75,14 @@ typedef struct s_game
 typedef struct s_ray
 {
 	int		raycaster;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	float	ray_distance_to_cross_x;
+	float	ray_distance_to_cross_y;
+	float	player_x_distance_to_x_grid;
+	float	player_y_distance_to_y_grid;
+	int		player_x_grid_position;
+	int		player_y_grid_position;
 }	t_ray;
 
 /* ******************************* DEFINES ********************************** */

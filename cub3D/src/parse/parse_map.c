@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:26:56 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/13 18:05:59 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/16 16:20:47 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,11 @@ void	add_space_to_map(t_map *map)
 	{
 		if (ft_strlen(map->map[i]) != (size_t)map->map_width)
 		{
-			new_line = ft_calloc(1, sizeof(char) * map->map_width + 1);
-			if (!new_line)
-				return ;
-			new_line = ft_add_space_end(map, new_line, i);
+			printf("map->map[i]: %s, len: %zu\n", map->map[i], ft_strlen(map->map[i]));
+			new_line = ft_add_space_end(map->map[i], map->map_width);
 			free(map->map[i]);
 			map->map[i] = new_line;
+			ft_printf(1, "new_line: %s\n", new_line);
 		}
 		i++;
 	}

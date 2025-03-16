@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/12 16:07:36 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:50:46 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ bool	check_content(t_map *map);
 void	add_space_to_map(t_map *map);
 
 /* parse_map2.c */
-char	*ft_add_space_end(t_map *map, char *new_line, int i);
+char	*ft_add_space_end(char *line, int width);
 bool	check_borders_line(t_map *map);
 bool	check_line(t_map *map, int *x, int y);
 bool	check_borders_column(t_map *map);

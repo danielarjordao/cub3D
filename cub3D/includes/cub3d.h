@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/16 18:22:58 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/03/17 06:04:49 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ typedef struct s_map
 	float	player_dir_y;
 	float	camera_x;
 	float	camera_y;
-	int	ray_x_direction;
-	int	ray_y_direction;
 }	t_map;
 
 typedef struct s_mlx

@@ -21,10 +21,16 @@ void	casting_each_ray(t_game *game, int x)
 	float	ray_dir_y;
 	float	ray_distance_to_cross_x;
 	float	ray_distance_to_cross_y;
-	int	ray_x_direction;
-	int	ray_y_direction;
+	int	step_x;
+	int	step_y;
+	int	ray_x_grid;
+	int	ray_y_grid;
 	float	player_x_distance_to_x_grid;
-	float	player_y_distance_to_y_grid; 
+	float	player_y_distance_to_y_grid;
+
+	//PEGAR O QUADRANTE QUE O RAIO SE ENCONTRA
+	ray_x_grid = (int)game->map->player_x;
+	ray_y_grid = (int)game->map->player_y;
 
 	calculate_ray_dir(game, x, &ray_dir_x, &ray_dir_y);
 
@@ -41,35 +47,36 @@ void	casting_each_ray(t_game *game, int x)
 	printf("Distancia percorrida para atravessar uma unidade do eixo x: %f\n", ray_distance_to_cross_x);
 	printf("Distancia percorrida para atravessar uma unidade do eixo y: %f\n", ray_distance_to_cross_y);
 	
+
 	//PEGAR DIRECAO DO RAIO E DIRECAO DO PLAYER PARA A LINHA DO GRID DO EIXO X E Y
 	//REVIEW -> e se a distancia der 0? transformo em 1?
 	if (ray_dir_x < 0)
 	{
-		ray_x_direction = -1;
-		player_x_distance_to_x_grid = (game->map->player_x - (int)game->map->player_x) * ray_distance_to_cross_x;
+		step_x = -1;
+		player_x_distance_to_x_grid = (game->map->player_x - ray_x_grid) * ray_distance_to_cross_x;
 	}
 	else
 	{
-		ray_x_direction = 1;
-		player_x_distance_to_x_grid = ((int)game->map->player_x + 1.0 - game->map->player_x) * ray_distance_to_cross_x;
+		step_x = 1;
+		player_x_distance_to_x_grid = (ray_x_grid + 1.0 - game->map->player_x) * ray_distance_to_cross_x;
 	}
 	if (!player_x_distance_to_x_grid)
 		player_x_distance_to_x_grid = 1.0;
-	printf("Direcao do raio x: %d",ray_x_direction);
+	printf("Direcao do raio x: %d",step_x);
 	printf("Distância do player para o grid x: %f", player_x_distance_to_x_grid);
 	if (ray_dir_y < 0)
 	{
-		ray_y_direction = -1;
-		player_y_distance_to_y_grid = (game->map->player_y - (int)game->map->player_y) * ray_distance_to_cross_y;
+		step_y = -1;
+		player_y_distance_to_y_grid = (game->map->player_y - ray_y_grid) * ray_distance_to_cross_y;
 	}
 	else
 	{
-		ray_y_direction = 1;
-		player_y_distance_to_y_grid = ((int)game->map->player_y + 1.0 - game->map->player_y) * ray_distance_to_cross_y;
+		step_y = 1;
+		player_y_distance_to_y_grid = (ray_y_grid + 1.0 - game->map->player_y) * ray_distance_to_cross_y;
 	}
 	if (!player_y_distance_to_y_grid)
 			player_y_distance_to_y_grid = 1.0;
-	printf("Direcao do raio x: %d",ray_y_direction);
+	printf("Direcao do raio x: %d",step_y);
 	printf("Distância do player para o grid x: %f", player_y_distance_to_y_grid);
 
 	//Incrementar raio ate bater em uma parede

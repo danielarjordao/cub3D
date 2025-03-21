@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:27:12 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/12 15:56:05 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:22:31 by daniela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,6 @@ bool	is_empty_line(char *line)
 		return (false);
 }
 
-bool	check_empty_lines_in_map(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map->map[i])
-	{
-		if (is_empty_line(map->map[i]))
-		{
-			j = i;
-			while (map->map[i] && is_empty_line(map->map[i]))
-				i++;
-			if (!map->map[i])
-			{
-				clean_extra_empty_lines(map, j);
-				return (false);
-			}
-			else
-				return (true);
-		}
-		i++;
-	}
-	return (false);
-}
-
 void	clean_extra_empty_lines(t_map *map, int i)
 {
 	int	j;
@@ -86,4 +60,16 @@ void	clean_extra_empty_lines(t_map *map, int i)
 		j++;
 	}
 	map->map_height = i;
+}
+
+bool	check_null_line(t_map *map, int i, int j)
+{
+	while (j < i)
+	{
+		if (!map->map[j] || !ft_strcmp(map->map[j], "\n")
+			|| map->map[j][0] == '\r')
+			return (true);
+		j++;
+	}
+	return (false);
 }

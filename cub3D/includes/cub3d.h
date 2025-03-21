@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/16 15:50:46 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:23:58 by daniela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "../lib/minilibx/mlx.h"
 
 /* ******************************* STRUCTS ********************************** */
-
 
 typedef struct s_map
 {
@@ -62,7 +61,7 @@ typedef struct s_game
 {
 	t_map		*map;
 	t_mlx		*mlx;
-	t_textures*	textures;
+	t_textures	*textures;
 	t_mem_alloc	mem_alloc;
 }	t_game;
 
@@ -95,7 +94,7 @@ typedef enum msg_error
 	MAP_BORDER_ERR
 }	t_error;
 
-/* ******************************* INIT_FUNCTIONS *********************************** */
+/* ****************************** INIT_FUNCTIONS **************************** */
 
 /* init_data.c */
 bool	init_map(t_map **map);
@@ -129,21 +128,19 @@ bool	is_map_valid(char *line, t_map **map);
 bool	are_colors_and_textures_set(t_map **map);
 void	add_map_line(char *line, t_map **map);
 bool	check_content(t_map *map);
-void	add_space_to_map(t_map *map);
 
 /* parse_map2.c */
-char	*ft_add_space_end(char *line, int width);
-bool	check_borders_line(t_map *map);
-bool	check_line(t_map *map, int *x, int y);
-bool	check_borders_column(t_map *map);
-bool	check_column(t_map *map, int x, int *y);
+bool	check_empty_lines_in_map(t_map *map);
+bool	check_borders(t_map *map);
+char	**copy_map(t_map *map);
+bool	recursively_check_borders(t_map *map, char **temp_map, int x, int y);
 
 /* parse_utils.c */
 int		ignore_spaces(char *line);
 bool	is_empty_line(char *line);
 char	*ft_trim_spaces(char *line);
-bool	check_empty_lines_in_map(t_map *map);
 void	clean_extra_empty_lines(t_map *map, int i);
+bool	check_null_line(t_map *map, int i, int j);
 
 /* print.c */
 void	print_map(t_map *map);
@@ -164,7 +161,6 @@ void	raycasting(void);
 
 /* render.c */
 void	render(void);
-
 
 /* ******************************* UTILS *********************************** */
 

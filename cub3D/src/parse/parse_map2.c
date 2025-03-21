@@ -3,121 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:27:03 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/16 16:19:42 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:23:46 by daniela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	*ft_add_space_end(char *line, int width)
+bool	check_empty_lines_in_map(t_map *map)
 {
-	char	*new_line;
-	int		i;
+	int	i;
+	int	j;
 
 	i = 0;
-	new_line = ft_calloc(1, width + 1);
-	while (line[i])
+	while (map->map[i])
 	{
-		if (line[i] == '\n')
-			break ;
-		new_line[i] = line[i];
+		if (is_empty_line(map->map[i]))
+		{
+			j = i;
+			while (map->map[i] && is_empty_line(map->map[i]))
+				i++;
+			if (!map->map[i])
+			{
+				clean_extra_empty_lines(map, j);
+				return (false);
+			}
+			else if (check_null_line(map, i, j))
+				return (true);
+		}
 		i++;
 	}
-	while (i < width)
-	{
-		new_line[i] = ' ';
-		i++;
-	}
-	new_line[i] = '\0';
-	return (new_line);
+	return (false);
 }
 
-bool	check_borders_line(t_map *map)
+bool	check_borders(t_map *map)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	**temp_map;
 
 	y = 0;
-	while (y < map->map_height)
+	temp_map = copy_map(map);
+	while (temp_map[y])
 	{
 		x = 0;
-		while (x < map->map_width)
+		while (temp_map[y][x])
 		{
-			while (ft_isspace(map->map[y][x]))
-				x++;
-			if (!map->map[y][x] || map->map[y][x] == '\n')
-				break ;
-			else if (!check_line(map, &x, y))
-				return (false);
+			if (ft_strrchr("02NSWE", temp_map[y][x]))
+			{
+				if (!recursively_check_borders(map, temp_map, x, y))
+				{
+					ft_free_matrix(temp_map);
+					return (false);
+				}
+			}
+			x++;
 		}
 		y++;
 	}
+	ft_free_matrix(temp_map);
 	return (true);
 }
 
-bool	check_line(t_map *map, int *x, int y)
+char	**copy_map(t_map *map)
 {
-	if (map->map[y][*x] != '1')
-		return (msg_error(MAP_BORDER_ERR));
-	else
-		(*x)++;
-	while (map->map[y][*x] && (map->map[y][*x] == '0' || map->map[y][*x] == 'N'
-		|| map->map[y][*x] == 'S' || map->map[y][*x] == 'E'
-		|| map->map[y][*x] == 'W'))
-		(*x)++;
-	if (map->map[y][*x - 1] != '1' && !map->map[y][*x])
-		return (msg_error(MAP_BORDER_ERR));
-	else if (map->map[y][*x] && (map->map[y][(*x) - 1] == '0'
-		|| map->map[y][(*x) - 1] == 'N' || map->map[y][(*x) - 1] == 'S'
-		|| map->map[y][(*x) - 1] == 'E' || map->map[y][(*x) - 1] == 'W')
-		&& map->map[y][*x] != '1')
-		return (msg_error(MAP_BORDER_ERR));
-	return (true);
-}
+	char	**temp_map;
+	int		i;
 
-bool	check_borders_column(t_map *map)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < map->map_width)
+	i = 0;
+	temp_map = ft_calloc(map->map_height + 1, sizeof(char *));
+	while (map->map[i])
 	{
-		y = 0;
-		while (y < map->map_height)
-		{
-			while (map->map[y] && ft_isspace(map->map[y][x]))
-				y++;
-			if (!map->map[y])
-				break ;
-			else if (!check_column(map, x, &y))
-				return (false);
-		}
-		x++;
+		temp_map[i] = ft_strdup(map->map[i]);
+		i++;
 	}
-	return (true);
+	return (temp_map);
 }
 
-bool	check_column(t_map *map, int x, int *y)
+bool	recursively_check_borders(t_map *map, char **temp_map, int x, int y)
 {
-	if (map->map[*y] && map->map[*y][x] && map->map[*y][x] != '1')
-		return (msg_error(MAP_BORDER_ERR));
-	else if ((*y) < map->map_height)
-		(*y)++;
-	while (map->map[*y] && (*y) < map->map_height &&
-		(map->map[*y][x] == '0' || map->map[*y][x] == 'N'
-		|| map->map[*y][x] == 'S' || map->map[*y][x] == 'E'
-		|| map->map[*y][x] == 'W'))
-		(*y)++;
-	if ((*y) == map->map_height && map->map[*y - 1][x] != '1' && !ft_isspace(map->map[(*y) - 1][x]))
-		return (msg_error(MAP_BORDER_ERR));
-	else if (map->map[*y] && (map->map[(*y) - 1][x] == '0'
-		|| map->map[(*y) - 1][x] == 'N' || map->map[(*y) - 1][x] == 'S'
-		|| map->map[(*y) - 1][x] == 'E' || map->map[(*y) - 1][x] == 'W')
-		&& map->map[*y][x] != '1')
-		return (msg_error(MAP_BORDER_ERR));
+	if (x < 0 || y < 0 || x >= map->map_width || y >= map->map_height)
+		return (false);
+	if (temp_map[y][x] == ' ')
+		return (false);
+	if (temp_map[y][x] == '1')
+		return (true);
+	if (temp_map[y][x] == 'V')
+		return (true);
+	temp_map[y][x] = 'V';
+	if (!recursively_check_borders(map, temp_map, x + 1, y)
+		|| !recursively_check_borders(map, temp_map, x - 1, y)
+		|| !recursively_check_borders(map, temp_map, x, y + 1)
+		|| !recursively_check_borders(map, temp_map, x, y - 1))
+		return (false);
 	return (true);
 }

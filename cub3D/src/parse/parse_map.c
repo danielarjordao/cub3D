@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:26:56 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/16 16:20:47 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:41:16 by daniela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,30 +84,7 @@ bool	check_content(t_map *map)
 		return (msg_error(MAP_FORMAT_ERR));
 	if (!map->player_dir)
 		return (msg_error(MAP_NO_PLAYER));
-	add_space_to_map(map);
-	if (!check_borders_line(map))
-		return (false);
-	if (!check_borders_column(map))
-		return (false);
+	if (!check_borders(map))
+		return (msg_error(MAP_BORDER_ERR));
 	return (true);
-}
-
-void	add_space_to_map(t_map *map)
-{
-	int		i;
-	char	*new_line;
-
-	i = 0;
-	while (map->map[i])
-	{
-		if (ft_strlen(map->map[i]) != (size_t)map->map_width)
-		{
-			printf("map->map[i]: %s, len: %zu\n", map->map[i], ft_strlen(map->map[i]));
-			new_line = ft_add_space_end(map->map[i], map->map_width);
-			free(map->map[i]);
-			map->map[i] = new_line;
-			ft_printf(1, "new_line: %s\n", new_line);
-		}
-		i++;
-	}
 }

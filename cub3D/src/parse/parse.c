@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:56:22 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/12 17:47:25 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:38:54 by daniela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,18 @@ bool	is_line_valid(char *line, t_map **map)
 		return (true);
 	else
 		return (false);
+	return (true);
+}
+
+bool	check_content(t_map *map)
+{
+	if (!map->map)
+		return (msg_error(MISSING_INFO));
+	if (check_empty_lines_in_map(map))
+		return (msg_error(MAP_FORMAT_ERR));
+	if (!map->player_dir)
+		return (msg_error(MAP_NO_PLAYER));
+	if (!check_borders(map))
+		return (msg_error(MAP_BORDER_ERR));
 	return (true);
 }

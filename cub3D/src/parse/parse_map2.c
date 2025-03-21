@@ -6,7 +6,7 @@
 /*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:27:03 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/21 17:23:46 by daniela          ###   ########.fr       */
+/*   Updated: 2025/03/21 17:46:14 by daniela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	check_borders(t_map *map)
 		x = 0;
 		while (temp_map[y][x])
 		{
-			if (ft_strrchr("02NSWE", temp_map[y][x]))
+			if (ft_strrchr("0NSWE", temp_map[y][x]))
 			{
 				if (!recursively_check_borders(map, temp_map, x, y))
 				{
@@ -90,9 +90,7 @@ bool	recursively_check_borders(t_map *map, char **temp_map, int x, int y)
 		return (false);
 	if (temp_map[y][x] == '1')
 		return (true);
-	if (temp_map[y][x] == 'V')
-		return (true);
-	temp_map[y][x] = 'V';
+	temp_map[y][x] = '1';
 	if (!recursively_check_borders(map, temp_map, x + 1, y)
 		|| !recursively_check_borders(map, temp_map, x - 1, y)
 		|| !recursively_check_borders(map, temp_map, x, y + 1)

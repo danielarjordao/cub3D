@@ -6,7 +6,7 @@
 /*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/21 17:23:58 by daniela          ###   ########.fr       */
+/*   Updated: 2025/03/21 17:39:12 by daniela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ bool	parse(char *file, t_map **map);
 bool	is_valid_extension(char *file, char *ext);
 bool	is_content_valid(int fd, t_map **map);
 bool	is_line_valid(char *line, t_map **map);
+bool	check_content(t_map *map);
 
 /* parse_textures.c */
 bool	is_a_texture(char *line);
@@ -127,7 +128,6 @@ void	convert_rgb_to_hex(int *color, t_map **map);
 bool	is_map_valid(char *line, t_map **map);
 bool	are_colors_and_textures_set(t_map **map);
 void	add_map_line(char *line, t_map **map);
-bool	check_content(t_map *map);
 
 /* parse_map2.c */
 bool	check_empty_lines_in_map(t_map *map);

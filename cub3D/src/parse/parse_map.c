@@ -6,7 +6,7 @@
 /*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:26:56 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/21 15:41:16 by daniela          ###   ########.fr       */
+/*   Updated: 2025/03/21 17:38:45 by daniela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,4 @@ void	add_map_line(char *line, t_map **map)
 			(*map)->map_width = ft_strlen(line);
 	}
 	(*map)->map_height++;
-}
-
-bool	check_content(t_map *map)
-{
-	if (!map->map)
-		return (msg_error(MISSING_INFO));
-	if (check_empty_lines_in_map(map))
-		return (msg_error(MAP_FORMAT_ERR));
-	if (!map->player_dir)
-		return (msg_error(MAP_NO_PLAYER));
-	if (!check_borders(map))
-		return (msg_error(MAP_BORDER_ERR));
-	return (true);
 }

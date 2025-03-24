@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:26:32 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/09 16:26:33 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:02:19 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ bool	is_color_valid(char *line, t_map **map)
 	char	**temp;
 	char	c;
 
+	line += ignore_spaces(line);
 	c = *line;
 	line++;
 	temp = ft_split(line, ',');

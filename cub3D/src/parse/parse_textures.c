@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:27:07 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/09 16:27:08 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:19:44 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ bool	is_texture_valid(char *line, t_map **map)
 
 bool	add_texture(char *path, char c, t_map **map)
 {
-	(void)map;
 	if (c == 'N' && !(*map)->no_texture)
 		(*map)->no_texture = path;
 	else if (c == 'S' && !(*map)->so_texture)

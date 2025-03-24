@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:26:56 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/24 12:56:47 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:24:17 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	add_map_line(char *line, t_map **map)
 	if (!(*map)->map)
 	{
 		(*map)->map = ft_calloc(1, sizeof(char *) * 2);
-		(*map)->map[0] = ft_strdup(line);
-		(*map)->map[1] = NULL;
+		(*map)->map[i] = ft_strdup(line);
+		(*map)->map[i + 1] = NULL;
 		(*map)->map_width = ft_strlen(line);
 	}
 	else
@@ -73,5 +73,7 @@ void	add_map_line(char *line, t_map **map)
 		if ((int)ft_strlen(line) > (*map)->map_width)
 			(*map)->map_width = ft_strlen(line);
 	}
+	if (!*map || !(*map)->map)
+		msg_error(MALLOC_FAIL);
 	(*map)->map_height++;
 }

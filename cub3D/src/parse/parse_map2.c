@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:27:03 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/21 17:46:14 by daniela          ###   ########.fr       */
+/*   Updated: 2025/03/24 17:28:11 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,16 @@ char	**copy_map(t_map *map)
 
 	i = 0;
 	temp_map = ft_calloc(map->map_height + 1, sizeof(char *));
+	if (!temp_map)
+		return ((char **)msg_error(MALLOC_FAIL));
 	while (map->map[i])
 	{
 		temp_map[i] = ft_strdup(map->map[i]);
+		if (!temp_map[i])
+		{
+			ft_free_matrix(temp_map);
+			return ((char **)msg_error(MALLOC_FAIL));
+		}
 		i++;
 	}
 	return (temp_map);

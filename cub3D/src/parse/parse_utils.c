@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniela <daniela@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:27:12 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/21 17:22:31 by daniela          ###   ########.fr       */
+/*   Updated: 2025/03/24 17:28:25 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_trim_spaces(char *line)
 	while (ft_isspace(line[i]))
 		i--;
 	new_line = ft_substr(line, 0, i + 1);
+	if (!new_line)
+		return ((char *)msg_error(MALLOC_FAIL));
 	return (new_line);
 }
 

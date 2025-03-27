@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/17 06:04:49 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:35:35 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ typedef struct s_map
 	int		ceiling_color_hex;
 	int		map_width;
 	int		map_height;
-	float		player_x;
-	float		player_y;
+	double		player_x;
+	double		player_y;
 	char	player_dir;
-	float	player_dir_x;
-	float	player_dir_y;
-	float	camera_x;
-	float	camera_y;
+	double	player_dir_x;
+	double	player_dir_y;
+	double	camera_x;
+	double	camera_y;
 }	t_map;
 
 typedef struct s_mlx
@@ -62,32 +62,39 @@ typedef struct s_textures
 	void	*ea_texture;
 }	t_textures;
 
-typedef struct s_game
-{
-	t_map		*map;
-	t_mlx		*mlx;
-	t_textures*	textures;
-	t_mem_alloc	mem_alloc;
-}	t_game;
 
 typedef struct s_ray
 {
 	int		raycaster;
-	float	ray_dir_x;
-	float	ray_dir_y;
-	float	ray_distance_to_cross_x;
-	float	ray_distance_to_cross_y;
-	float	player_x_distance_to_x_grid;
-	float	player_y_distance_to_y_grid;
-	int		player_x_grid_position;
-	int		player_y_grid_position;
+	double	dir_x;
+	double	dir_y;
+	double	length_per_x_unity;
+	double	length_per_y_unity;
+	double	magnitude_crossing_x;
+	double	magnitude_crossing_y;
+	int	step_x;
+	int	step_y;
+	int	x_grid;
+	int	y_grid;
+	int	wall_height;
 }	t_ray;
 
 /* ******************************* DEFINES ********************************** */
 
+typedef struct s_game
+{
+	t_map		*map;
+	t_mlx		*mlx;
+	t_textures	*textures;
+	t_mem_alloc	mem_alloc;
+	t_ray		ray;
+}	t_game;
 # define SCREEN_WIDTH 1800
 # define SCREEN_HEIGHT 900
 # define CAMERA_MAGNITUDE 0.66
+# define NONE 0
+# define VERTICAL 1
+# define HORIZONTAL 2
 
 typedef enum msg_error
 {
@@ -162,7 +169,7 @@ void	handle_events(void);
 void	raycasting(t_game *game);
 
 /* render.c */
-void	render(t_game *game);
+void	render(t_game *game, int x_screen, int wall_height);
 
 
 /* ******************************* UTILS *********************************** */

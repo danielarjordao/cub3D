@@ -21,8 +21,8 @@ bool	is_map_valid(char *line, t_map **map)
 			if ((*map)->player_dir)
 				return (msg_error(MAP_INVALID_CHAR));
 			(*map)->player_dir = line[i];
-			(*map)->player_x = i + 1;
-			(*map)->player_y = (*map)->map_height + 1;
+			(*map)->player_x = i;
+			(*map)->player_y = (*map)->map_height;
 		}
 		i++;
 	}

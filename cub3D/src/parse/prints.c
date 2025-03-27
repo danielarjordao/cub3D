@@ -54,8 +54,8 @@ void	print_map(t_map *map)
 	printf("\n");
 	printf("Map width: %d\n", map->map_width);
 	printf("Map height: %d\n", map->map_height);
-	printf("Player x: %d\n", map->player_x);
-	printf("Player y: %d\n", map->player_y);
+	printf("Player x: %f\n", map->player_x);
+	printf("Player y: %f\n", map->player_y);
 	printf("Player direction: %c\n", map->player_dir);
 	printf("\n");
 }

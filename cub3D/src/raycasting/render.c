@@ -8,10 +8,10 @@ void	render(t_game *game, int x_screen, int wall_height)
 	int wall_start;
 	int wall_end;
 
-	wall_start = SCREEN_HEIGHT / 2 - wall_height / 2;
+	wall_start = (SCREEN_HEIGHT / 2 - wall_height / 2) - 1;
 	if (wall_start < 0)
 		wall_start = 0;
-	wall_end = SCREEN_HEIGHT / 2 + wall_height / 2;
+	wall_end = (SCREEN_HEIGHT / 2 + wall_height / 2) - 1;
 	if (wall_end >= SCREEN_HEIGHT)
 		wall_end = SCREEN_HEIGHT - 1;
 	
@@ -29,8 +29,9 @@ void	render(t_game *game, int x_screen, int wall_height)
 	//Drawing wall
 	while (y_screen <= wall_end)
 	{
-		*(unsigned int *)pixel_ptr = game->map->ceiling_color_hex;
 		//TODO - PRINTAR PAREDE
+		*(unsigned int *)pixel_ptr = 0xff0000;
+		pixel_ptr += game->mlx->size_line;
 		y_screen++;
 	}
 	//Drawing floor
@@ -41,8 +42,6 @@ void	render(t_game *game, int x_screen, int wall_height)
 		pixel_ptr += game->mlx->size_line;
 		y_screen++;
 	}
-	ft_printf(1, "		Updating window\n");
-	mlx_put_image_to_window(game->mlx->connection, game->mlx->win, game->mlx->img_to_render, 0 , 0);
 	ft_printf(1, "Rendering complete\n\n");
 }
 

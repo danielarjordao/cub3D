@@ -13,8 +13,8 @@ bool	init_map(t_map **map)
 	(*map)->map = NULL;
 	(*map)->map_width = 0;
 	(*map)->map_height = 0;
-	(*map)->player_x = 0;
-	(*map)->player_y = 0;
+	(*map)->player_x = 0.0;
+	(*map)->player_y = 0.0;
 	(*map)->player_dir = 0;
 	(*map)->floor_color[0] = -1;
 	(*map)->floor_color[1] = -1;

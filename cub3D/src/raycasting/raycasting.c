@@ -6,98 +6,100 @@ void	set_camera_plane(t_game *game)
 	game->map->camera_y = (-1) * game->map->player_dir_x * CAMERA_MAGNITUDE;
 }
 
-void	calculate_ray_dir(t_game *game, int x, float *ray_dir_x, float *ray_dir_y)
+//Calculamos O fator que vai de -1 a 1 e nos dá em qual parte do plano da camera o raio está
+void	calculate_ray_dir(t_game *game, int x_screen)
 {
 	int	fator;
 
-	fator = ((2.0 * x) /  SCREEN_WIDTH) - 1;
-	*ray_dir_x = game->map->camera_x * fator + game->map->player_dir_x;
-	*ray_dir_y = game->map->camera_y * fator + game->map->player_dir_y;
+	fator = ((2.0 * x_screen) /  SCREEN_WIDTH) - 1;
+	game->ray.dir_x = game->map->camera_x * fator + game->map->player_dir_x;
+	game->ray.dir_y = game->map->camera_y * fator + game->map->player_dir_y;
 }
 
-void	casting_each_ray(t_game *game, int x)
+void	casting_each_ray(t_game *game, int x_screen)
 {
-	float	ray_dir_x;
-	float	ray_dir_y;
-	float	ray_distance_to_cross_x;
-	float	ray_distance_to_cross_y;
-	int	step_x;
-	int	step_y;
-	int	ray_x_grid;
-	int	ray_y_grid;
-	float	player_x_distance_to_x_grid;
-	float	player_y_distance_to_y_grid;
-
 	//PEGAR O QUADRANTE QUE O RAIO SE ENCONTRA
-	ray_x_grid = (int)game->map->player_x;
-	ray_y_grid = (int)game->map->player_y;
+	game->ray.x_grid = (int)game->map->player_x;
+	game->ray.y_grid = (int)game->map->player_y;
 
-	calculate_ray_dir(game, x, &ray_dir_x, &ray_dir_y);
+	calculate_ray_dir(game, x_screen);
 
 	//CALCULAR DISTANCIA PARA CRUZAR UMA UNIDADE DO EIXO X E Y
-	if (ray_dir_x == 0)
-		ray_distance_to_cross_x = INT_MAX;
+	if (game->ray.dir_x == 0)
+		game->ray.length_per_x_unity = INT_MAX;
 	else
-		ray_distance_to_cross_x = abs(1 / game->map->player_dir_x);
-	if (ray_dir_y == 0)
-		ray_distance_to_cross_y = INT_MAX;
+		game->ray.length_per_x_unity = abs(1 / game->ray.dir_x);
+	if (game->ray.dir_y == 0)
+		game->ray.length_per_y_unity = INT_MAX;
 	else
-		ray_distance_to_cross_y = abs(1 / game->map->player_dir_y);
-	
-	printf("Distancia percorrida para atravessar uma unidade do eixo x: %f\n", ray_distance_to_cross_x);
-	printf("Distancia percorrida para atravessar uma unidade do eixo y: %f\n", ray_distance_to_cross_y);
+		game->ray.length_per_y_unity = abs(1 / game->ray.dir_y);
+	printf("Distancia percorrida para atravessar uma unidade do eixo x: %f\n", game->ray.length_per_x_unity);
+	printf("Distancia percorrida para atravessar uma unidade do eixo y: %f\n", game->ray.length_per_y_unity);
 	
 
 	//PEGAR DIRECAO DO RAIO E DIRECAO DO PLAYER PARA A LINHA DO GRID DO EIXO X E Y
 	//REVIEW -> e se a distancia der 0? transformo em 1?
-	if (ray_dir_x < 0)
+	if (game->ray.dir_x < 0)
 	{
-		step_x = -1;
-		player_x_distance_to_x_grid = (game->map->player_x - ray_x_grid) * ray_distance_to_cross_x;
+		game->ray.step_x = -1;
+		game->ray.magnitude_crossing_x = (game->map->player_x - game->ray.x_grid) * game->ray.length_per_x_unity;
+	}
+	else if (game->ray.dir_x > 0)
+	{
+		game->ray.step_x = 1;
+		game->ray.magnitude_crossing_x = (game->ray.x_grid + 1.0 - game->map->player_x) * game->ray.length_per_x_unity;
 	}
 	else
+		game->ray.magnitude_crossing_x = INT_MAX;
+	printf("Direcao do raio x: %d", game->ray.step_x);
+	printf("Distância do player para o grid x: %f", game->ray.magnitude_crossing_x);
+	if (game->ray.dir_y < 0)
 	{
-		step_x = 1;
-		player_x_distance_to_x_grid = (ray_x_grid + 1.0 - game->map->player_x) * ray_distance_to_cross_x;
+		game->ray.step_y = -1;
+		game->ray.magnitude_crossing_y = (game->map->player_y - game->ray.y_grid) * game->ray.length_per_y_unity;
 	}
-	if (!player_x_distance_to_x_grid)
-		player_x_distance_to_x_grid = 1.0;
-	printf("Direcao do raio x: %d",step_x);
-	printf("Distância do player para o grid x: %f", player_x_distance_to_x_grid);
-	if (ray_dir_y < 0)
+	else if (game->ray.dir_y > 0)
 	{
-		step_y = -1;
-		player_y_distance_to_y_grid = (game->map->player_y - ray_y_grid) * ray_distance_to_cross_y;
+		game->ray.step_y = 1;
+		game->ray.magnitude_crossing_y = (game->ray.y_grid + 1.0 - game->map->player_y) * game->ray.length_per_y_unity;
 	}
 	else
-	{
-		step_y = 1;
-		player_y_distance_to_y_grid = (ray_y_grid + 1.0 - game->map->player_y) * ray_distance_to_cross_y;
-	}
-	if (!player_y_distance_to_y_grid)
-			player_y_distance_to_y_grid = 1.0;
-	printf("Direcao do raio x: %d",step_y);
-	printf("Distância do player para o grid x: %f", player_y_distance_to_y_grid);
+		game->ray.magnitude_crossing_y = INT_MAX;
+	printf("Direcao do raio x: %d",game->ray.step_y);
+	printf("Distância do player para o grid x: %f", game->ray.magnitude_crossing_y);
 
 	//Incrementar raio ate bater em uma parede
-	float	ray_x;
-	float	ray_y;
+	ft_printf(1, "		Use DDA algorithm\n");
+	int	hit_grid;
+	int	perpWallDist;
 
-	ray_x = game->map->player_x;
-	ray_y = game->map->player_y;
-	while (!is_wall((int)ray_x, (int)ray_y))
+	game->ray.y_grid = game->map->player_y;
+	hit_grid = NONE;
+	while (hit_grid == NONE)
 	{
-		if (player_x_distance_to_x_grid < player_y_distance_to_y_grid)
+		if (game->ray.magnitude_crossing_x < game->ray.magnitude_crossing_y)
 		{
-			ray_x += game->map->player_dir_x * player_x_distance_to_x_grid;
-			ray_y += game->map->player_dir_y * player_x_distance_to_x_grid;
+			game->ray.magnitude_crossing_x += game->ray.length_per_x_unity;
+			game->ray.x_grid += game->ray.step_x;
+			if (game->map->map[game->ray.y_grid][game->ray.x_grid] == '1')
+					hit_grid = VERTICAL;
 		}
 		else
 		{
-			ray_x += game->map->player_dir_x * player_y_distance_to_y_grid;
-			ray_y += game->map->player_dir_y * player_y_distance_to_y_grid;
+			game->ray.magnitude_crossing_y += game->ray.length_per_y_unity;
+			game->ray.y_grid += game->ray.step_y;
+			if (game->map->map[game->ray.y_grid][game->ray.x_grid] == '1')
+					hit_grid = HORIZONTAL;
 		}
 	}
+	ft_printf(1, "		Calculate ray distance\n");
+	if (hit_grid == VERTICAL)
+		perpWallDist = (game->ray.magnitude_crossing_x - game->ray.length_per_x_unity);
+	else
+      		perpWallDist = (game->ray.magnitude_crossing_y - game->ray.length_per_y_unity);
+	ft_printf(1, "		Calculate wall height\n");
+	int lineHeight = (int)(SCREEN_HEIGHT / perpWallDist);
+	ft_printf(1, "Raycasting complete\n\n");
 }
 
 void	raycasting(t_game *game)
@@ -106,22 +108,14 @@ void	raycasting(t_game *game)
 	ft_printf(1, "		Save player position and direction\n");
 	set_camera_plane(game);
 	ft_printf(1, "		Calculate ray direction\n");
-	int	x;
-	float	ray_dir_x;
-	float	ray_dir_y;
-	float	ray_distance_to_cross_x;
-	float	ray_distance_to_cross_y;
-	float	player_x_distance_to_x_grid;
-	float	player_y_distance_to_y_grid;
+	int	x_screen;
 
-	x = 0;
-	while (x < SCREEN_WIDTH)
+	x_screen = 0;
+	while (x_screen < SCREEN_WIDTH)
 	{
-		casting_each_ray(game, x);	
+		casting_each_ray(game, x_screen);
+		render(game, x_screen, game->ray.wall_height);
+		x_screen++;	
 	}
-	ft_printf(1, "		Use DDA algorithm\n");
-	ft_printf(1, "		Calculate ray distance\n");
-	ft_printf(1, "		Calculate wall height\n");
-	ft_printf(1, "Raycasting complete\n\n");
-	render(game);
+	mlx_put_image_to_window(game->mlx->connection, game->mlx->win, game->mlx->img_to_render, 0 , 0);
 }

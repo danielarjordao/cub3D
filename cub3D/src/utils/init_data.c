@@ -2,6 +2,7 @@
 
 bool	init_map(t_map **map)
 {
+	//REVIEW -> Trocar para calloc
 	*map = (t_map *)malloc(sizeof(t_map));
 	if (!*map)
 		return (MALLOC_FAIL);
@@ -30,12 +31,12 @@ void	init_variables_game(t_game *game)
 	game->mem_alloc.ptr_mem_list = NULL;
 	game->mem_alloc.matrix_mem_list = NULL;
 	game->mlx = ft_calloc(1, sizeof(t_mlx));
+	//REVIEW - TESTAR SE FALHAR
 	check_mem(game, &(game->mem_alloc.ptr_mem_list), game->mlx, "ft_calloc failed");
 	game->mlx->connection = NULL;
 	game->mlx->win = NULL;
 	game->mlx->img_to_render = NULL;
 	game->mlx->addr = NULL;
-
 }
 
 void	init_mlx(t_game *game)
@@ -57,13 +58,13 @@ void	init_mlx(t_game *game)
 	if (!(game->mlx->addr))
 		destroy_free_exit_error(game, "mlx_get_data_addr failed");
 	//REVIEW -> memoria verificada ate esse ponto
-	//game->img_grass = NULL;
 }
 
 void	init_textures(t_game *game)
 {
 	ft_printf(1, "		Initializing textures\n");
 	(void)game;
+	//TODO - Criar imagems
 	/* game->img_enemy2 = xpm_to_image(game, "./images/bat2.xpm");
 	if (game->img_player_l == NULL || game->img_player_r == NULL
 	|| game->img_grass == NULL || game->img_tree == NULL

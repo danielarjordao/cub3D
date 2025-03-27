@@ -5,7 +5,7 @@ void	init_player_direction(t_game *game)
 	if (game->map->player_dir == 'N')
 	{
 		game->map->player_dir_x = 0.0;
-		game->map->player_dir_y = 1.0;
+		game->map->player_dir_y = -1.0;
 	}
 	else if (game->map->player_dir == 'W')
 	{
@@ -15,7 +15,7 @@ void	init_player_direction(t_game *game)
 	else if (game->map->player_dir == 'S')
 	{
 		game->map->player_dir_x = 0.0;
-		game->map->player_dir_y = -1.0;
+		game->map->player_dir_y = 1.0;
 	}
 	else if (game->map->player_dir == 'E')
 	{
@@ -38,6 +38,6 @@ void	init_raycasting(t_game *game)
 	printf("			x = %f, y = %f\n", game->map->player_dir_x, game->map->player_dir_y);
 	ft_printf(1, "			Setting player position\n");
 	init_player_position(game);
-	printf("			pos_x = %f\n" , game->map->player_dir_x);
-	printf("			pos_y = %f\n", game->map->player_dir_y);
+	printf("			pos_x = %f\n" , game->map->player_x);
+	printf("			pos_y = %f\n", game->map->player_y);
 }

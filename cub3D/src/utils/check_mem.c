@@ -15,7 +15,7 @@ void	if_not_null_destroy(t_game *game, void *img_ptr)
 		mlx_destroy_image(game->mlx, img_ptr);
 }
 
-static void	call_destroy_functions(t_game *game)
+void	call_destroy_functions(t_game *game)
 {
 	//TODO -> Destruir todas os ponteiros de imagens já criados
 	//if_not_null_destroy(game, game->image);
@@ -28,7 +28,7 @@ static void	call_destroy_functions(t_game *game)
 		mlx_destroy_display(game->mlx->connection);
 }
 
-static void	free_all(t_mem_alloc *mem_allocation)
+void	free_all(t_mem_alloc *mem_allocation)
 {
 	if (mem_allocation->ptr_mem_list != NULL)
 		ft_lstclear(&(mem_allocation->ptr_mem_list), free);
@@ -57,10 +57,3 @@ void	destroy_free_exit_error(t_game *game, char *error_msg)
 	free_exit_error(&(game->mem_alloc), error_msg);
 }
 
-int	close_game(t_game *game)
-{
-	printf("You left the game\n");
-	call_destroy_functions(game);
-	free_all(&(game->mem_alloc));
-	exit(EXIT_SUCCESS);
-}

@@ -37,3 +37,11 @@ bool	msg_error(t_error err)
 		ft_printf(2, "Unknown error %d\n", err);
 	return (false);
 }
+
+int	close_game(t_game *game)
+{
+	printf("You left the game\n");
+	call_destroy_functions(game);
+	free_all(&(game->mem_alloc));
+	exit(EXIT_SUCCESS);
+}

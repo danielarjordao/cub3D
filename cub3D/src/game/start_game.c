@@ -6,7 +6,7 @@ void	start_game(t_game *game)
 	init_game(game);
 	ft_printf(1, "Structures initialized\n\n");
 	raycasting(game);
-	handle_events();
+	handle_events(game);
 	ft_printf(1, "Starting game loop\n\n");
 	mlx_loop(game->mlx->connection);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/27 16:46:53 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/03/28 04:44:27 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	print_map(t_map *map);
 void	start_game(t_game *game);
 
 /* handle_events.c */
-void	handle_events(void);
+void	handle_events(t_game *game);
 
 /* ****************************** RAYCASTING ******************************** */
 
@@ -179,6 +179,8 @@ void	render(t_game *game, int x_screen, int wall_height);
 void	check_mem(t_game *game, t_list **ptr_or_matrix_list, \
 	void *ptr, char *error_msg);
 void	destroy_free_exit_error(t_game *game, char *error_msg);
+void	call_destroy_functions(t_game *game);
+void	free_all(t_mem_alloc *mem_allocation);
 
 /* free_mem.c */
 void	free_mem(void);
@@ -186,5 +188,6 @@ void	free_map(t_map *map);
 
 /* utils.c */
 bool	msg_error(t_error err);
+int	close_game(t_game *game);
 
 #endif

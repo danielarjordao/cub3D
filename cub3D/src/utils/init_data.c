@@ -37,6 +37,12 @@ void	init_variables_game(t_game *game)
 	game->mlx->win = NULL;
 	game->mlx->img_to_render = NULL;
 	game->mlx->addr = NULL;
+	game->key_w = FALSE;
+	game->key_a = FALSE;
+	game->key_s = FALSE;
+	game->key_d = FALSE;
+	game->key_left_arrow = FALSE;
+	game->key_right_arrow = FALSE;
 }
 
 void	init_mlx(t_game *game)

@@ -6,7 +6,7 @@
 #    By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/03/28 11:33:53 by mde-souz         ###   ########.fr        #
+#    Updated: 2025/03/28 20:18:32 by mde-souz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT_DIR = ./lib/libft/
 MLX = ./lib/minilibx/libmlx.a
 MLX_DIR = ./lib/minilibx/
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 LIBS = -lm
 MLX_FLAGS = -L./lib/minilibx -lmlx -lX11 -lXext
 SRCS = src/main.c \

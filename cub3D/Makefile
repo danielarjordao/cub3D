@@ -6,7 +6,7 @@
 #    By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/03/15 19:22:43 by mde-souz         ###   ########.fr        #
+#    Updated: 2025/03/28 11:33:53 by mde-souz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,11 @@ MLX = ./lib/minilibx/libmlx.a
 MLX_DIR = ./lib/minilibx/
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+LIBS = -lm
 MLX_FLAGS = -L./lib/minilibx -lmlx -lX11 -lXext
 SRCS = src/main.c \
 		src/utils/init_data.c \
-		src/utils/init_data2.c \
+		src/utils/init_raycasting.c \
 		src/utils/free_mem.c \
 		src/utils/check_mem.c \
 		src/utils/utils.c \
@@ -48,7 +49,7 @@ $(NAME): $(OBJS)
 	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
 	@echo "✔️ libmlx.a compiled successfully"
 	@echo "Compiling $(NAME)..."
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(LIBS) $(MLX) $(MLX_FLAGS)
 	@echo "✔️ $(NAME) compiled successfully"
 
 $(OBJS_DIR)/%.o: src/%.c

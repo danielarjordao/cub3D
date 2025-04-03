@@ -1,29 +1,35 @@
 #include "../../includes/cub3d.h"
 
-char	*get_pixel_from_texture(double x_wall, double y_wall)
+char	*get_pixel_from_texture(t_game * game, int y_screen, int wall_start)
 {
-	int	pixel_x;
-	int	pixel_y;
-	
-	pixel_x = (int)round(255 * x_wall);
-	pixel_y = (int)round(255 * y_wall);
+	int 	tex_y;
+	int	tex_x;
+	int	*pixel_from_texture;
+	double	wall_x; // Onde exatamente a parede foi atingida (0.0 a 1.0)
 
-	double wallX; // Onde exatamente a parede foi atingida (0.0 a 1.0)
-	if (side == 0) // Parede vertical
-	wallX = posY + perpWallDist * rayDirY;
+	if (game->ray.hit_grid == VERTICAL) // Parede vertical
+		wall_x = game->map->player_y + game->ray.perpWallDist * game->ray.dir_y;
 	else // Parede horizontal
-	wallX = posX + perpWallDist * rayDirX;
+		wall_x = game->map->player_x + game->ray.perpWallDist * game->ray.dir_x;
 
 	// Pega apenas a parte fracionária desta coordenada.
 	// Isto dá a posição X relativa dentro da célula da parede.
-	wallX -= floor(wallX);
+	wall_x -= floor(wall_x);
 
-	int texX = (int)(wallX * (double)TEXTURE_WIDTH);
+	tex_x = (int)(wall_x * (double)TEXTURE_WIDTH);
 
 	// Verifica se precisas de inverter a coordenada X da textura
 	// (depende se estás a olhar para uma parede Este vs Oeste, ou Norte vs Sul)
-	if(side == 0 && rayDirX > 0) texX = TEXTURE_WIDTH - texX - 1;
-	if(side == 1 && rayDirY < 0) texX = TEXTURE_WIDTH - texX - 1;
+	if(game->ray.hit_grid == VERTICAL && game->ray.dir_x > 0)
+		tex_x = TEXTURE_WIDTH - tex_x - 1;
+	if(game->ray.hit_grid == HORIZONTAL && game->ray.dir_y < 0)
+		tex_x = TEXTURE_WIDTH - tex_x - 1;
+
+	tex_y = (y_screen - wall_start) * (TEXTURE_HEIGHT / game->ray.wall_height);
+
+	pixel_from_texture = game->textures->ea_texture + (tex_x * game->mlx->bpp / 8) + (tex_y * game->mlx->size_line) 
+
+
 }
 
 
@@ -33,7 +39,7 @@ void	render(t_game *game, int x_screen, int wall_height)
 	char	*pixel_ptr;
 	int wall_start;
 	int wall_end;
-
+	
 	wall_start = (SCREEN_HEIGHT / 2 - wall_height / 2) - 1;
 	if (wall_start < 0)
 		wall_start = 0;

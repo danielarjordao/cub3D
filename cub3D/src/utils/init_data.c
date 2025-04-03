@@ -71,7 +71,8 @@ void	init_textures(t_game *game)
 	ft_printf(1, "		Initializing textures\n");
 	(void)game;
 	//TODO - Criar imagems
-	/* game->img_enemy2 = xpm_to_image(game, "./images/bat2.xpm");
+	 game->textures = xpm_to_image(game, "./images/bat2.xpm");
+	/*
 	if (game->img_player_l == NULL || game->img_player_r == NULL
 	|| game->img_grass == NULL || game->img_tree == NULL
 	|| game->img_collectible == NULL || game->img_player_d == NULL

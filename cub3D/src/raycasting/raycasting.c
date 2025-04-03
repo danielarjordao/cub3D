@@ -63,32 +63,30 @@ void	casting_each_ray(t_game *game, int x_screen)
 	//Incrementar raio ate bater em uma parede
 	printf("magnitude_crossing_x = %f\n", game->ray.magnitude_crossing_x);
 	printf("magnitude_crossing_y = %f\n", game->ray.magnitude_crossing_y);
-	int	hit_grid;
-	double	perpWallDist;
-
-	hit_grid = NONE;
-	while (hit_grid == NONE)
+	
+	game->ray.hit_grid = NONE;
+	while (game->ray.hit_grid == NONE)
 	{
 		if (game->ray.magnitude_crossing_x < game->ray.magnitude_crossing_y)
 		{
 			game->ray.magnitude_crossing_x += game->ray.length_per_x_unity;
 			game->ray.x_grid += game->ray.step_x;
 			if (game->map->map[game->ray.y_grid][game->ray.x_grid] == '1')
-					hit_grid = VERTICAL;
+					game->ray.hit_grid = VERTICAL;
 		}
 		else
 		{
 			game->ray.magnitude_crossing_y += game->ray.length_per_y_unity;
 			game->ray.y_grid += game->ray.step_y;
 			if (game->map->map[game->ray.y_grid][game->ray.x_grid] == '1')
-					hit_grid = HORIZONTAL;
+					game->ray.hit_grid = HORIZONTAL;
 		}
 	}
-	if (hit_grid == VERTICAL)
-		perpWallDist = (game->ray.magnitude_crossing_x - game->ray.length_per_x_unity);
+	if (game->ray.hit_grid == VERTICAL)
+		game->ray.perpWallDist = (game->ray.magnitude_crossing_x - game->ray.length_per_x_unity);
 	else
-      		perpWallDist = (game->ray.magnitude_crossing_y - game->ray.length_per_y_unity);
-	game->ray.wall_height = (int)(SCREEN_HEIGHT / perpWallDist);
+      		game->ray.perpWallDist = (game->ray.magnitude_crossing_y - game->ray.length_per_y_unity);
+	game->ray.wall_height = (int)(SCREEN_HEIGHT / game->ray.perpWallDist);
 }
 
 void	raycasting(t_game *game)

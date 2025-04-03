@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/28 20:44:42 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:46:14 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ typedef struct s_mlx
 
 typedef struct s_textures
 {
-	void	*no_texture;
-	void	*so_texture;
-	void	*we_texture;
-	void	*ea_texture;
+	char	*img;
+	int		bpp;
+	int		size_line;
+	int		endian;
 }	t_textures;
 
 
@@ -73,11 +73,13 @@ typedef struct s_ray
 	double	length_per_y_unity;
 	double	magnitude_crossing_x;
 	double	magnitude_crossing_y;
+	double	perpWallDist;
 	int	step_x;
 	int	step_y;
 	int	x_grid;
 	int	y_grid;
 	int	wall_height;
+	int	hit_grid;
 }	t_ray;
 
 /* ******************************* DEFINES ********************************** */
@@ -105,6 +107,8 @@ typedef struct s_game
 # define HORIZONTAL 2
 # define DELTA_MOV 0.1
 # define ROTATE_ANGLE 10
+# define TEXTURE_WIDTH 256
+# define TEXTURE_HEIGHT 256
 
 typedef enum msg_error
 {

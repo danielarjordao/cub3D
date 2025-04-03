@@ -5,30 +5,34 @@ void	change_player_position(t_game *game)
 {
 	double new_pos_x;
 	double new_pos_y;
+	double delta_mov_x;
+	double delta_mov_y;
 	double dir_magnitude;
 
 	dir_magnitude = sqrt(game->map->player_dir_x * game->map->player_dir_x + game->map->player_dir_y * game->map->player_dir_y);
 	if (game->key_w == TRUE && game->key_s == FALSE)
 	{
-		new_pos_x = game->map->player_x + (DELTA_MOV * game->map->player_dir_x) / dir_magnitude;
-		new_pos_y = game->map->player_y + (DELTA_MOV * game->map->player_dir_y) / dir_magnitude;
+		delta_mov_x = (DELTA_MOV * game->map->player_dir_x) / dir_magnitude;
+		delta_mov_y = (DELTA_MOV * game->map->player_dir_y) / dir_magnitude;
 	}
 	else if (game->key_w == FALSE && game->key_s == TRUE)
 	{
-		new_pos_x = game->map->player_x - (DELTA_MOV * game->map->player_dir_x) / dir_magnitude;
-		new_pos_y = game->map->player_y - (DELTA_MOV * game->map->player_dir_y) / dir_magnitude;
+		delta_mov_x = - (DELTA_MOV * game->map->player_dir_x) / dir_magnitude;
+		delta_mov_y = - (DELTA_MOV * game->map->player_dir_y) / dir_magnitude;
 	}
 	if (game->key_a == TRUE && game->key_d == FALSE)
 	{
-		new_pos_x = game->map->player_x + (DELTA_MOV * game->map->player_dir_y) / dir_magnitude;
-		new_pos_y = game->map->player_y + (DELTA_MOV * game->map->player_dir_x * (-1)) / dir_magnitude;
+		delta_mov_x = (DELTA_MOV * game->map->player_dir_y) / dir_magnitude;
+		delta_mov_y = (DELTA_MOV * game->map->player_dir_x * (-1)) / dir_magnitude;
 	}
 	else if (game->key_a == FALSE && game->key_d == TRUE)
 	{
-		new_pos_x = game->map->player_x + (DELTA_MOV * game->map->player_dir_y * (-1)) / dir_magnitude;
-		new_pos_y = game->map->player_y + (DELTA_MOV * game->map->player_dir_x) / dir_magnitude;
+		delta_mov_x = (DELTA_MOV * game->map->player_dir_y * (-1)) / dir_magnitude;
+		delta_mov_y = (DELTA_MOV * game->map->player_dir_x) / dir_magnitude;
 	}
-	if (game->map->map[(int)new_pos_y][(int)new_pos_x] != 1)
+	new_pos_x = game->map->player_x + 1.1 * delta_mov_x;
+	new_pos_y = game->map->player_y + 1.1 * delta_mov_y;
+	if (game->map->map[(int)new_pos_y][(int)new_pos_x] != '1')
 	{
 		game->map->player_x = new_pos_x;
 		game->map->player_y = new_pos_y;
@@ -40,18 +44,25 @@ void	rotate_player(t_game *game)
 {
 	printf("Move_player function");
 	double radianos;
+	double magnitude;
+	double new_dir_x;
+	double new_dir_y;
 
 	radianos = ROTATE_ANGLE * M_PI / 180.0;
 	if (game->key_left_arrow == TRUE && game->key_right_arrow == FALSE)
 	{
-		game->map->player_dir_x = cos(radianos) * game->map->player_dir_x - sin(radianos) * game->map->player_dir_y;
-		game->map->player_dir_y = sin(radianos) * game->map->player_dir_x + cos(radianos) * game->map->player_dir_y;
+		new_dir_x = cos(radianos) * game->map->player_dir_x - sin(radianos) * game->map->player_dir_y;
+		new_dir_y = sin(radianos) * game->map->player_dir_x + cos(radianos) * game->map->player_dir_y;
 	}
 	else if (game->key_left_arrow == FALSE && game->key_right_arrow == TRUE)
 	{
-		game->map->player_dir_x = cos(-radianos) * game->map->player_dir_x - sin(-radianos) * game->map->player_dir_y;
-		game->map->player_dir_y = sin(-radianos) * game->map->player_dir_x + cos(-radianos) * game->map->player_dir_y;
+		new_dir_x = cos(-radianos) * game->map->player_dir_x - sin(-radianos) * game->map->player_dir_y;
+		new_dir_y = sin(-radianos) * game->map->player_dir_x + cos(-radianos) * game->map->player_dir_y;
 	}
+	// Normalizar o vetor de direção
+        magnitude = sqrt(new_dir_x * new_dir_x + new_dir_y * new_dir_y);
+	game->map->player_dir_x = new_dir_x / magnitude;
+        game->map->player_dir_y = new_dir_y / magnitude;
 }
 
 int	handle_key(int key_code, void *param)

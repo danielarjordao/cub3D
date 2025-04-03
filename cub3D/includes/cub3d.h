@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/28 04:44:27 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/03/28 20:44:42 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,22 @@ typedef struct s_game
 	t_textures	*textures;
 	t_mem_alloc	mem_alloc;
 	t_ray		ray;
+	int			key_w;
+	int			key_s;
+	int			key_a;
+	int			key_d;
+	int			key_left_arrow;
+	int			key_right_arrow;
 }	t_game;
+
 # define SCREEN_WIDTH 1800
 # define SCREEN_HEIGHT 900
 # define CAMERA_MAGNITUDE 0.66
 # define NONE 0
 # define VERTICAL 1
 # define HORIZONTAL 2
+# define DELTA_MOV 0.1
+# define ROTATE_ANGLE 10
 
 typedef enum msg_error
 {

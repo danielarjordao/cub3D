@@ -1,5 +1,32 @@
 #include "../../includes/cub3d.h"
 
+char	*get_pixel_from_texture(double x_wall, double y_wall)
+{
+	int	pixel_x;
+	int	pixel_y;
+	
+	pixel_x = (int)round(255 * x_wall);
+	pixel_y = (int)round(255 * y_wall);
+
+	double wallX; // Onde exatamente a parede foi atingida (0.0 a 1.0)
+	if (side == 0) // Parede vertical
+	wallX = posY + perpWallDist * rayDirY;
+	else // Parede horizontal
+	wallX = posX + perpWallDist * rayDirX;
+
+	// Pega apenas a parte fracionária desta coordenada.
+	// Isto dá a posição X relativa dentro da célula da parede.
+	wallX -= floor(wallX);
+
+	int texX = (int)(wallX * (double)TEXTURE_WIDTH);
+
+	// Verifica se precisas de inverter a coordenada X da textura
+	// (depende se estás a olhar para uma parede Este vs Oeste, ou Norte vs Sul)
+	if(side == 0 && rayDirX > 0) texX = TEXTURE_WIDTH - texX - 1;
+	if(side == 1 && rayDirY < 0) texX = TEXTURE_WIDTH - texX - 1;
+}
+
+
 void	render(t_game *game, int x_screen, int wall_height)
 {
 	int	y_screen;

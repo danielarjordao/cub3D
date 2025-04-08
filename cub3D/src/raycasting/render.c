@@ -1,10 +1,10 @@
 #include "../../includes/cub3d.h"
 
-char	*get_pixel_from_texture(t_game * game, int y_screen, int wall_start)
+unsigned int	get_pixel_from_texture(t_game *game, int y_screen, int wall_start)
 {
 	int 	tex_y;
 	int	tex_x;
-	int	*pixel_from_texture;
+	unsigned int	*pixel_from_texture;
 	double	wall_x; // Onde exatamente a parede foi atingida (0.0 a 1.0)
 
 	if (game->ray.hit_grid == VERTICAL) // Parede vertical
@@ -15,7 +15,6 @@ char	*get_pixel_from_texture(t_game * game, int y_screen, int wall_start)
 	// Pega apenas a parte fracionária desta coordenada.
 	// Isto dá a posição X relativa dentro da célula da parede.
 	wall_x -= floor(wall_x);
-
 	tex_x = (int)(wall_x * (double)TEXTURE_WIDTH);
 
 	// Verifica se precisas de inverter a coordenada X da textura
@@ -24,14 +23,11 @@ char	*get_pixel_from_texture(t_game * game, int y_screen, int wall_start)
 		tex_x = TEXTURE_WIDTH - tex_x - 1;
 	if(game->ray.hit_grid == HORIZONTAL && game->ray.dir_y < 0)
 		tex_x = TEXTURE_WIDTH - tex_x - 1;
-
-	tex_y = (y_screen - wall_start) * (TEXTURE_HEIGHT / game->ray.wall_height);
-
-	pixel_from_texture = game->textures->ea_texture + (tex_x * game->mlx->bpp / 8) + (tex_y * game->mlx->size_line) 
-
-
+	tex_y = (int)((y_screen - wall_start) * ((double)TEXTURE_HEIGHT / game->ray.wall_height));
+	pixel_from_texture = (unsigned int *) (game->textures[NO].pixel_address \
+		+ (tex_x * game->textures[NO].bpp / 8) + (tex_y * game->textures[NO].size_line));
+	return (*pixel_from_texture);
 }
-
 
 void	render(t_game *game, int x_screen, int wall_height)
 {
@@ -60,7 +56,7 @@ void	render(t_game *game, int x_screen, int wall_height)
 	while (y_screen <= wall_end)
 	{
 		//TODO - PRINTAR PAREDE
-		*(unsigned int *)pixel_ptr = 0xff0000;
+		*(unsigned int *)pixel_ptr = (get_pixel_from_texture(game, y_screen, wall_start));
 		pixel_ptr += game->mlx->size_line;
 		y_screen++;
 	}

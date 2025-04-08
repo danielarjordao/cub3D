@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/04/03 18:46:14 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:08:33 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,14 @@ typedef struct s_mlx
 	int		height;
 }	t_mlx;
 
-typedef struct s_textures
+typedef struct s_texture
 {
-	char	*img;
+	void	*img;
+	char	*pixel_address;
 	int		bpp;
 	int		size_line;
 	int		endian;
-}	t_textures;
+}	t_texture;
 
 
 typedef struct s_ray
@@ -88,7 +89,7 @@ typedef struct s_game
 {
 	t_map		*map;
 	t_mlx		*mlx;
-	t_textures	*textures;
+	t_texture	textures[4];
 	t_mem_alloc	mem_alloc;
 	t_ray		ray;
 	int			key_w;
@@ -125,6 +126,14 @@ typedef enum msg_error
 	MAP_FORMAT_ERR,
 	MAP_INVALID_CHAR
 }	t_error;
+
+typedef enum orientation
+{
+	NO,
+	SO,
+	EA,
+	WE
+}	t_orientation;
 
 /* ******************************* INIT_FUNCTIONS *********************************** */
 
@@ -201,6 +210,7 @@ void	free_map(t_map *map);
 
 /* utils.c */
 bool	msg_error(t_error err);
-int	close_game(t_game *game);
+void	*xpm_to_image(t_game *game, char *filename);
+int		close_game(t_game *game);
 
 #endif

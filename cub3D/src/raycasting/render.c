@@ -19,13 +19,32 @@ unsigned int	get_pixel_from_texture(t_game *game, int y_screen, int wall_start)
 
 	// Verifica se precisas de inverter a coordenada X da textura
 	// (depende se estás a olhar para uma parede Este vs Oeste, ou Norte vs Sul)
-	if(game->ray.hit_grid == VERTICAL && game->ray.dir_x > 0)
+	
+	
+	if(game->ray.hit_grid == VERTICAL && game->ray.dir_x < 0)
 		tex_x = TEXTURE_WIDTH - tex_x - 1;
-	if(game->ray.hit_grid == HORIZONTAL && game->ray.dir_y < 0)
+	else if(game->ray.hit_grid == HORIZONTAL && game->ray.dir_y > 0)
 		tex_x = TEXTURE_WIDTH - tex_x - 1;
+	
 	tex_y = (int)((y_screen - wall_start) * ((double)TEXTURE_HEIGHT / game->ray.wall_height));
-	pixel_from_texture = (unsigned int *) (game->textures[NO].pixel_address \
-		+ (tex_x * game->textures[NO].bpp / 8) + (tex_y * game->textures[NO].size_line));
+	
+	//verifica qual sera a textura utilizada
+	t_orientation orientation;
+
+	if(game->ray.hit_grid == VERTICAL && game->ray.dir_x > 0)
+		orientation = WE;
+	else if(game->ray.hit_grid == VERTICAL && game->ray.dir_x < 0)
+		orientation = EA;
+	else if(game->ray.hit_grid == HORIZONTAL && game->ray.dir_y > 0)
+		orientation = NO;
+	else
+		orientation = SO;
+	
+	//pega o pixel da textura
+	pixel_from_texture = (unsigned int *) (game->textures[orientation].pixel_address \
+		+ (tex_x * game->textures[orientation].bpp / 8) + \
+		(tex_y * game->textures[orientation].size_line));
+	
 	return (*pixel_from_texture);
 }
 
@@ -55,7 +74,6 @@ void	render(t_game *game, int x_screen, int wall_height)
 	//Drawing wall
 	while (y_screen <= wall_end)
 	{
-		//TODO - PRINTAR PAREDE
 		*(unsigned int *)pixel_ptr = (get_pixel_from_texture(game, y_screen, wall_start));
 		pixel_ptr += game->mlx->size_line;
 		y_screen++;

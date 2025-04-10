@@ -90,7 +90,6 @@ void	render(t_game *game, int x_screen, int wall_height)
 		pixel_ptr += game->mlx->size_line;
 		y_screen++;
 	}
-	//mlx_put_image_to_window(game->mlx->connection, game->mlx->win, &(game->gun.img), 0 , 0);
 }
 
 /* #include "../../includes/cub3d.h"

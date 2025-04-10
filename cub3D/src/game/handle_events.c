@@ -49,16 +49,19 @@ void	rotate_player(t_game *game)
 	double new_dir_y;
 
 	radianos = ROTATE_ANGLE * M_PI / 180.0;
-	if (game->key_left_arrow == TRUE && game->key_right_arrow == FALSE)
+	if (game->key_left_arrow == FALSE && game->key_right_arrow == TRUE)
 	{
 		new_dir_x = cos(radianos) * game->map->player_dir_x - sin(radianos) * game->map->player_dir_y;
 		new_dir_y = sin(radianos) * game->map->player_dir_x + cos(radianos) * game->map->player_dir_y;
 	}
-	else if (game->key_left_arrow == FALSE && game->key_right_arrow == TRUE)
+	else if (game->key_left_arrow == TRUE && game->key_right_arrow == FALSE)
 	{
 		new_dir_x = cos(-radianos) * game->map->player_dir_x - sin(-radianos) * game->map->player_dir_y;
 		new_dir_y = sin(-radianos) * game->map->player_dir_x + cos(-radianos) * game->map->player_dir_y;
 	}
+
+	else
+		return ;
 	// Normalizar o vetor de direção
         magnitude = sqrt(new_dir_x * new_dir_x + new_dir_y * new_dir_y);
 	game->map->player_dir_x = new_dir_x / magnitude;
@@ -95,7 +98,7 @@ int	handle_pressed_key(void *param)
 	bool	refresh;
 
 	count++;
-	if (count != 10000)
+	if (count != 7000)
 		return(EXIT_SUCCESS);
 	refresh = FALSE;
 	printf("handle_pressed_key function\n");
@@ -105,7 +108,7 @@ int	handle_pressed_key(void *param)
 		change_player_position(game);
 		refresh = TRUE;
 	}
-	else if (game->key_left_arrow == TRUE  || game->key_right_arrow == TRUE )
+	if (game->key_left_arrow == TRUE  || game->key_right_arrow == TRUE )
 	{
 		rotate_player(game);
 		refresh = TRUE;

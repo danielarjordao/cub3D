@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/04/08 17:08:33 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/10 20:25:03 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_game
 	t_map		*map;
 	t_mlx		*mlx;
 	t_texture	textures[4];
+	t_texture	gun;
 	t_mem_alloc	mem_alloc;
 	t_ray		ray;
 	int			key_w;

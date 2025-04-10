@@ -104,6 +104,11 @@ void	init_textures(t_game *game)
 		mlx_get_data_addr(game->textures[WE].img, \
 		&(game->textures[WE].bpp), &(game->textures[WE].size_line), \
 		&(game->textures[WE].endian));
+	game->gun.img = xpm_to_image(game, "textures/GLOCK_0001.xpm");
+	game->gun.pixel_address = \
+		mlx_get_data_addr(game->gun.img, \
+		&(game->gun.bpp), &(game->gun.size_line), \
+		&(game->gun.endian));
 	if (game->textures[NO].img == NULL || game->textures[SO].img == NULL \
 		|| game->textures[EA].img == NULL || game->textures[WE].img == NULL)
 	destroy_free_exit_error(game, "mlx_xpm_file_to_image failed");

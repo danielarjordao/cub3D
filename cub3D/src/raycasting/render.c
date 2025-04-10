@@ -26,7 +26,12 @@ unsigned int	get_pixel_from_texture(t_game *game, int y_screen, int wall_start)
 	else if(game->ray.hit_grid == HORIZONTAL && game->ray.dir_y > 0)
 		tex_x = TEXTURE_WIDTH - tex_x - 1;
 	
-	tex_y = (int)((y_screen - wall_start) * ((double)TEXTURE_HEIGHT / game->ray.wall_height));
+	if (game->ray.wall_height <= SCREEN_HEIGHT)
+		tex_y = (int)((y_screen - wall_start) * ((double)TEXTURE_HEIGHT / game->ray.wall_height));
+	else
+		tex_y = (int)((y_screen - wall_start + (game->ray.wall_height - SCREEN_HEIGHT) / 2) * ((double)TEXTURE_HEIGHT / game->ray.wall_height));
+	if (tex_y >= TEXTURE_HEIGHT) // Evita overflow
+		tex_y = TEXTURE_HEIGHT - 1;
 	
 	//verifica qual sera a textura utilizada
 	t_orientation orientation;
@@ -54,14 +59,14 @@ void	render(t_game *game, int x_screen, int wall_height)
 	char	*pixel_ptr;
 	int wall_start;
 	int wall_end;
-	
+
 	wall_start = (SCREEN_HEIGHT / 2 - wall_height / 2) - 1;
 	if (wall_start < 0)
 		wall_start = 0;
 	wall_end = (SCREEN_HEIGHT / 2 + wall_height / 2) - 1;
 	if (wall_end >= SCREEN_HEIGHT)
 		wall_end = SCREEN_HEIGHT - 1;
-	
+
 	y_screen = 0;
 	pixel_ptr = (game->mlx->addr + (x_screen * game->mlx->bpp / 8) + (y_screen * game->mlx->size_line));
 	//Drawing ceiling
@@ -72,7 +77,7 @@ void	render(t_game *game, int x_screen, int wall_height)
 		y_screen++;
 	}
 	//Drawing wall
-	while (y_screen <= wall_end)
+	while (y_screen < wall_end)
 	{
 		*(unsigned int *)pixel_ptr = (get_pixel_from_texture(game, y_screen, wall_start));
 		pixel_ptr += game->mlx->size_line;
@@ -85,6 +90,7 @@ void	render(t_game *game, int x_screen, int wall_height)
 		pixel_ptr += game->mlx->size_line;
 		y_screen++;
 	}
+	//mlx_put_image_to_window(game->mlx->connection, game->mlx->win, &(game->gun.img), 0 , 0);
 }
 
 /* #include "../../includes/cub3d.h"

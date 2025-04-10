@@ -61,8 +61,8 @@ void	casting_each_ray(t_game *game, int x_screen)
 	else
 		game->ray.magnitude_crossing_y = INT_MAX;
 	//Incrementar raio ate bater em uma parede
-	printf("magnitude_crossing_x = %f\n", game->ray.magnitude_crossing_x);
-	printf("magnitude_crossing_y = %f\n", game->ray.magnitude_crossing_y);
+	//printf("magnitude_crossing_x = %f\n", game->ray.magnitude_crossing_x);
+	//printf("magnitude_crossing_y = %f\n", game->ray.magnitude_crossing_y);
 	
 	game->ray.hit_grid = NONE;
 	while (game->ray.hit_grid == NONE)

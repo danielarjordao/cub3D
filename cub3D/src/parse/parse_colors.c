@@ -1,4 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_colors.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/09 16:26:32 by dramos-j          #+#    #+#             */
+/*   Updated: 2025/03/24 13:02:19 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
+
+bool	is_a_color(char *line)
+{
+	line += ignore_spaces(line);
+	if ((line[0] == 'F' || line[0] == 'C') && ft_isspace(line[1]))
+		return (true);
+	else
+		return (false);
+}
 
 bool	is_color_valid(char *line, t_map **map)
 {
@@ -6,10 +27,7 @@ bool	is_color_valid(char *line, t_map **map)
 	char	c;
 
 	line += ignore_spaces(line);
-	if (*line != 'F' && *line != 'C')
-		return (false);
-	else
-		c = *line;
+	c = *line;
 	line++;
 	temp = ft_split(line, ',');
 	if (!temp || !temp[0] || !temp[1] || !temp[2] || temp[3])
@@ -71,8 +89,8 @@ void	convert_rgb_to_hex(int *color, t_map **map)
 {
 	if (color == (*map)->floor_color)
 		(*map)->floor_color_hex = (color[0] << 16)
-		+ (color[1] << 8) + color[2];
+			+ (color[1] << 8) + color[2];
 	else if (color == (*map)->ceiling_color)
 		(*map)->ceiling_color_hex = (color[0] << 16)
-		+ (color[1] << 8) + color[2];
+			+ (color[1] << 8) + color[2];
 }

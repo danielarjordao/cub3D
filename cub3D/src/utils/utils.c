@@ -23,16 +23,23 @@ bool	msg_error(t_error err)
 		ft_printf(2, "Color duplicated\n");
 	else if (err == MISSING_INFO)
 		ft_printf(2, "Missing information\n");
-	else if (err == MAP_FORMAT_ERR)
+	else
+		return (msg_error2(err));
+	return (false);
+}
+
+bool	msg_error2(t_error err)
+{
+	if (err == MAP_FORMAT_ERR)
 		ft_printf(2, "Map format error\n");
 	else if (err == MAP_INVALID_CHAR)
 		ft_printf(2, "Invalid character in map\n");
-	else if (err == MISSING_INFO)
-		ft_printf(2, "Missing information\n");
-	else if (err == MAP_FORMAT_ERR)
-		ft_printf(2, "Map format error\n");
-	else if (err == MAP_INVALID_CHAR)
-		ft_printf(2, "Invalid character in map\n");
+	else if (err == MAP_PLAYER_DUP)
+		ft_printf(2, "Player duplicated\n");
+	else if (err == MAP_NO_PLAYER)
+		ft_printf(2, "No player found\n");
+	else if (err == MAP_BORDER_ERR)
+		ft_printf(2, "Map border error\n");
 	else
 		ft_printf(2, "Unknown error %d\n", err);
 	return (false);

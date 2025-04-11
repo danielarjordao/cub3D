@@ -6,7 +6,7 @@
 #    By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/03/28 20:18:32 by mde-souz         ###   ########.fr        #
+#    Updated: 2025/04/11 11:32:59 by mde-souz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS = src/main.c \
 		src/utils/utils.c \
 		src/parse/parse.c \
 		src/parse/parse_map.c \
+		src/parse/parse_map2.c \
 		src/parse/parse_colors.c \
 		src/parse/parse_textures.c \
 		src/parse/parse_utils.c \

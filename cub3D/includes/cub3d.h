@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 18:14:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/04/10 20:25:03 by mde-souz         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/11 11:43:33 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -18,7 +20,6 @@
 # include <math.h>
 
 /* ******************************* STRUCTS ********************************** */
-
 
 typedef struct s_map
 {
@@ -125,7 +126,10 @@ typedef enum msg_error
 	COL_DUPLICATE,
 	MISSING_INFO,
 	MAP_FORMAT_ERR,
-	MAP_INVALID_CHAR
+	MAP_INVALID_CHAR,
+	MAP_PLAYER_DUP,
+	MAP_NO_PLAYER,
+	MAP_BORDER_ERR
 }	t_error;
 
 typedef enum orientation
@@ -136,7 +140,7 @@ typedef enum orientation
 	WE
 }	t_orientation;
 
-/* ******************************* INIT_FUNCTIONS *********************************** */
+/* ****************************** INIT_FUNCTIONS **************************** */
 
 /* init_data.c */
 bool	init_map(t_map **map);
@@ -152,32 +156,41 @@ bool	parse(char *file, t_map **map);
 bool	is_valid_extension(char *file, char *ext);
 bool	is_content_valid(int fd, t_map **map);
 bool	is_line_valid(char *line, t_map **map);
+bool	check_content(t_map *map);
 
 /* parse_textures.c */
+bool	is_a_texture(char *line);
 bool	is_texture_valid(char *line, t_map **map);
-bool	is_path_valid(char *line, char c, t_map **map);
 bool	add_texture(char *line, char c, t_map **map);
 
 /* parse_colors.c */
+bool	is_a_color(char *line);
 bool	is_color_valid(char *line, t_map **map);
 bool	add_color(char **temp, int *color, t_map **map);
-bool	add_color(char **temp, int *color, t_map **map);
 bool	valid_number_format(char *str);
-void	convert_rgb_to_hex(int *color, t_map **map);
 void	convert_rgb_to_hex(int *color, t_map **map);
 
 /* parse_map.c */
 bool	is_map_valid(char *line, t_map **map);
 bool	are_colors_and_textures_set(t_map **map);
-bool	are_colors_and_textures_set(t_map **map);
 void	add_map_line(char *line, t_map **map);
+
+/* parse_map2.c */
+bool	check_empty_lines_in_map(t_map *map);
+bool	check_borders(t_map *map);
+char	**copy_map(t_map *map);
+bool	recursively_check_borders(t_map *map, char **temp_map, int x, int y);
 
 /* parse_utils.c */
 int		ignore_spaces(char *line);
 bool	is_empty_line(char *line);
 char	*ft_trim_spaces(char *line);
+void	clean_extra_empty_lines(t_map *map, int i);
+bool	check_null_line(t_map *map, int i, int j);
 
+/* print.c */
 void	print_map(t_map *map);
+void	print_map2(t_map *map);
 
 /* ******************************** GAME ************************************ */
 
@@ -211,6 +224,7 @@ void	free_map(t_map *map);
 
 /* utils.c */
 bool	msg_error(t_error err);
+bool	msg_error2(t_error err);
 void	*xpm_to_image(t_game *game, char *filename);
 int		close_game(t_game *game);
 

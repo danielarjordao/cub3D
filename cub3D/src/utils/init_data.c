@@ -5,7 +5,7 @@ bool	init_map(t_map **map)
 	//REVIEW -> Trocar para calloc
 	*map = (t_map *)malloc(sizeof(t_map));
 	if (!*map)
-		return (MALLOC_FAIL);
+		return (msg_error(MALLOC_FAIL));
 	(*map)->no_texture = NULL;
 	(*map)->so_texture = NULL;
 	(*map)->we_texture = NULL;

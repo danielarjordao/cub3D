@@ -128,6 +128,5 @@ void	render(t_game *game, int x_screen, int wall_height)
 		pixel_ptr += game->mlx->size_line;
 		y_screen++;
 	}
-render_gun_to_image(game, x_screen);
-	//render_gun2(game, x_screen);
+	render_gun(game, x_screen);
 }

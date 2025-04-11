@@ -101,7 +101,7 @@ int	handle_pressed_key(void *param)
 	if (count != 7000)
 		return(EXIT_SUCCESS);
 	refresh = FALSE;
-	printf("handle_pressed_key function\n");
+
 	game = (t_game *)param;
 	if (game->key_w == TRUE || game->key_a == TRUE || game->key_s == TRUE || game->key_d == TRUE)
 	{

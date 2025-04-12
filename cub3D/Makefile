@@ -6,7 +6,7 @@
 #    By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/04/11 11:32:59 by mde-souz         ###   ########.fr        #
+#    Updated: 2025/04/12 21:16:52 by mde-souz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,23 +35,24 @@ SRCS = src/main.c \
 		src/raycasting/render.c \
 		src/game/start_game.c \
 		src/game/handle_events.c \
+		src/game/move_player.c \
 		src/parse/prints.c
 OBJS_DIR = objs
 OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
 RM = rm -rf
 
-all: $(NAME)
+all: libs $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "Compiling libft.a..."
-	@$(MAKE) -C $(LIBFT_DIR) --silent
-	@echo "✔️ libft.a compiled successfully"
 	@echo "Compiling libmlx.a..."
 	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
 	@echo "✔️ libmlx.a compiled successfully"
 	@echo "Compiling $(NAME)..."
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(LIBS) $(MLX) $(MLX_FLAGS)
 	@echo "✔️ $(NAME) compiled successfully"
+
+libs:
+	@$(MAKE) -C $(LIBFT_DIR) --silent
 
 $(OBJS_DIR)/%.o: src/%.c
 	@mkdir -p $(dir $@)

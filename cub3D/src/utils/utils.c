@@ -45,41 +45,32 @@ bool	msg_error2(t_error err)
 	return (false);
 }
 
-void	*xpm_to_image(t_game *game, char *filename)
+void	xpm_to_image(t_game *game, t_texture *texture, char *filename)
 {
 	void	*ptr_img;
-	int		*ptr_width;
-	int		*ptr_heigth;
+	int		width;
+	int		heigth;
 
-	ptr_width = ft_calloc(1, sizeof(int));
-	if (!ptr_width)
-		destroy_free_exit_error(game, "ft_calloc failed");
-	ptr_heigth = ft_calloc(1, sizeof(int));
-	if (!ptr_width)
-	{
-		free(ptr_width);
-		destroy_free_exit_error(game, "ft_calloc failed");
-	}
 	ptr_img = mlx_xpm_file_to_image(game->mlx->connection, filename, \
-		ptr_width, ptr_heigth);
-	printf("largura da imagem %d e deveria ser %d\n", *ptr_width, TEXTURE_WIDTH);
-	printf("altuta da imagem %d e deveria ser %d\n", *ptr_heigth, TEXTURE_HEIGHT);
-	if (*ptr_width != TEXTURE_WIDTH || *ptr_heigth != TEXTURE_HEIGHT)
+		&width, &heigth);
+	if (!ptr_img)
+		destroy_free_exit_error(game, "mlx_xpm_file_to_image failed");
+	if (width != TEXTURE_WIDTH || heigth != TEXTURE_HEIGHT)
 	{
-		free (ptr_width);
-		free(ptr_heigth);
 		mlx_destroy_image(game->mlx, ptr_img);
 		destroy_free_exit_error(game, "The size of the img must be 256x256");
 	}
-	free (ptr_width);
-	free(ptr_heigth);
-	return (ptr_img);
+	texture->img = ptr_img;
+	texture->pixel_address = \
+		mlx_get_data_addr(texture->img, \
+		&(texture->bpp), &(texture->size_line), \
+		&(texture->endian));
 }
 
 int	close_game(t_game *game)
 {
 	printf("You left the game\n");
 	call_destroy_functions(game);
-	free_all(&(game->mem_alloc));
+	ft_free_t_mem_alloc(&(game->mem_alloc));
 	exit(EXIT_SUCCESS);
 }

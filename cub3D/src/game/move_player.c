@@ -5,7 +5,8 @@ void	set_delta_mov(t_game *game, double *delta_mov_x, \
 {
 	double	dir_magnitude;
 
-	dir_magnitude = sqrt(game->map->player_dir_x * game->map->player_dir_x + game->map->player_dir_y * game->map->player_dir_y);
+	dir_magnitude = sqrt(pow(game->map->player_dir_x, 2) + \
+		pow(game->map->player_dir_y, 2));
 	if (game->key_w == TRUE && game->key_s == FALSE)
 	{
 		*delta_mov_x = (DELTA_MOV * game->map->player_dir_x) / dir_magnitude;
@@ -19,11 +20,11 @@ void	set_delta_mov(t_game *game, double *delta_mov_x, \
 	if (game->key_a == TRUE && game->key_d == FALSE)
 	{
 		*delta_mov_x += (DELTA_MOV * game->map->player_dir_y) / dir_magnitude;
-		*delta_mov_y += (DELTA_MOV * game->map->player_dir_x * (-1)) / dir_magnitude;
+		*delta_mov_y -= DELTA_MOV * game->map->player_dir_x / dir_magnitude;
 	}
 	else if (game->key_a == FALSE && game->key_d == TRUE)
 	{
-		*delta_mov_x += (DELTA_MOV * game->map->player_dir_y * (-1)) / dir_magnitude;
+		*delta_mov_x -= DELTA_MOV * game->map->player_dir_y / dir_magnitude;
 		*delta_mov_y += (DELTA_MOV * game->map->player_dir_x) / dir_magnitude;
 	}
 }

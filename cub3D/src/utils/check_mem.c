@@ -12,13 +12,18 @@ void	check_mem(t_game *game, t_list **ptr_or_matrix_list, \
 void	if_not_null_destroy(t_game *game, void *img_ptr)
 {
 	if (img_ptr != NULL)
-		mlx_destroy_image(game->mlx, img_ptr);
+		mlx_destroy_image(game->mlx->connection, img_ptr);
 }
 
 void	call_destroy_functions(t_game *game)
 {
 	//TODO -> Destruir todas os ponteiros de imagens já criados
 	//if_not_null_destroy(game, game->image);
+	if_not_null_destroy(game, game->textures[NO].img);
+	if_not_null_destroy(game, game->textures[SO].img);
+	if_not_null_destroy(game, game->textures[WE].img);
+	if_not_null_destroy(game, game->textures[EA].img);
+	if_not_null_destroy(game, game->gun.img);
 	if (game->mlx->win != NULL)
 		mlx_destroy_image(game->mlx->connection, game->mlx->img_to_render);
 	if (game->mlx->win != NULL)
@@ -41,6 +46,7 @@ void	free_exit_error(t_mem_alloc *mem_allocation, \
 void	destroy_free_exit_error(t_game *game, char *error_msg)
 {
 	call_destroy_functions(game);
+	free_map(game->map);
 	get_next_line(-1);
 	free_exit_error(&(game->mem_alloc), error_msg);
 }

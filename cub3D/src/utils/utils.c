@@ -55,7 +55,7 @@ void	xpm_to_image(t_game *game, t_texture *texture, char *filename)
 		&width, &heigth);
 	if (!ptr_img)
 		destroy_free_exit_error(game, "mlx_xpm_file_to_image failed");
-	if (width != TEXTURE_WIDTH || heigth != TEXTURE_HEIGHT)
+	if (width != TEX_WIDTH || heigth != TEX_HEIGHT)
 	{
 		mlx_destroy_image(game->mlx, ptr_img);
 		destroy_free_exit_error(game, "The size of the img must be 256x256");
@@ -71,6 +71,7 @@ int	close_game(t_game *game)
 {
 	printf("You left the game\n");
 	call_destroy_functions(game);
+	free_map(game->map);
 	ft_free_t_mem_alloc(&(game->mem_alloc));
 	exit(EXIT_SUCCESS);
 }

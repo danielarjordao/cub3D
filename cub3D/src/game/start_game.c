@@ -1,4 +1,4 @@
-# include "../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	start_game(t_game *game)
 {

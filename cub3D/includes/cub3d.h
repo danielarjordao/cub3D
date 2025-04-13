@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/12 21:14:02 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/13 19:23:10 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,19 @@ typedef struct s_game
 	int			key_right_arrow;
 }	t_game;
 
-# define SCREEN_WIDTH 1800
-# define SCREEN_HEIGHT 900
-# define CAMERA_MAGNITUDE 0.66
-# define NONE 0
-# define VERTICAL 1
-# define HORIZONTAL 2
-# define DELTA_MOV 0.1
-# define ROTATE_ANGLE 8
-# define TEXTURE_WIDTH 256
-# define TEXTURE_HEIGHT 256
+# ifndef VARIABLES
+#  define SCREEN_WIDTH 1800
+#  define SCREEN_HEIGHT 900
+#  define CAMERA_MAGNITUDE 0.66
+#  define NONE 0
+#  define VERTICAL 1
+#  define HORIZONTAL 2
+#  define DELTA_MOV 0.1
+#  define ROTATE_ANGLE 8
+#  define TEX_WIDTH 256
+#  define TEX_HEIGHT 256
+#  define M_PI 3.14159265358979323846
+# endif
 
 typedef enum msg_error
 {
@@ -208,8 +211,17 @@ void	change_player_position(t_game *game);
 /* raycasting.c */
 void	raycasting(t_game *game);
 
+/* raycasting_utils.c */
+void	calculate_magnitute_crossing_axis(t_game *game);
+void	check_hit_grid(t_game *game);
+
 /* render.c */
 void	render(t_game *game, int x_screen, int wall_height);
+
+/* render_utils.c */
+t_orientation	get_texture_orientation(t_game *game);
+int	get_x_pixel_position(t_game *game, double wall_x);
+int	get_y_pixel_position(t_game *game, int y_screen, int wall_start);
 
 
 /* ******************************* UTILS *********************************** */

@@ -53,6 +53,43 @@ unsigned int	get_pixel_from_texture(t_game *game, int y_screen, int wall_start)
 	return (*pixel_from_texture);
 }
 
+void	render_gun(t_game *game, int x_screen)
+{
+	unsigned int	*pixel_from_texture;
+	char	*pixel_ptr;
+	int	gun_start_x;
+	int	gun_end_x;
+	int	gun_start_y;
+	int	y_screen;
+
+	
+	gun_start_x = SCREEN_WIDTH / 2 - (SCREEN_WIDTH / 3) / 2;
+	gun_end_x = SCREEN_WIDTH / 2 + (SCREEN_WIDTH / 3) / 2 - 1;
+	gun_start_y = SCREEN_HEIGHT - (SCREEN_WIDTH / 3);
+
+	// Itera sobre cada pixel da imagem da arma
+    
+	if (x_screen >= gun_start_x && x_screen <= gun_end_x)
+	{
+		y_screen = gun_start_y;
+		pixel_ptr = (game->mlx->addr + (x_screen * game->mlx->bpp / 8) + (y_screen * game->mlx->size_line));
+		while (y_screen >= gun_start_y && y_screen < SCREEN_HEIGHT)
+		{
+			// Calcula o endereço do pixel na imagem da arma
+			//src_pixel = game->gun.pixel_address + (y_screen * game->gun.size_line + x_screen * (game->gun.bpp / 8));
+			pixel_from_texture = (unsigned int *)((game->gun.pixel_address \
+					+ (x_screen - gun_start_x) * TEXTURE_WIDTH / (SCREEN_WIDTH / 3) * game->gun.bpp / 8) + \
+					( (y_screen - gun_start_y) * TEXTURE_WIDTH / (SCREEN_WIDTH / 3) * game->gun.size_line));
+			// Calcula o endereço do pixel na imagem de renderização
+			// Copia o pixel para a imagem de renderização
+			if (*pixel_from_texture != 0xff000000)
+				*(unsigned int *)pixel_ptr = *pixel_from_texture;
+			y_screen++;
+			pixel_ptr += game->mlx->size_line;
+		}
+	}
+}
+
 void	render(t_game *game, int x_screen, int wall_height)
 {
 	int	y_screen;
@@ -68,6 +105,7 @@ void	render(t_game *game, int x_screen, int wall_height)
 		wall_end = SCREEN_HEIGHT - 1;
 
 	y_screen = 0;
+	//REVIEW -> tentar pagar a parte  + (y_screen * game->mlx->size_line)
 	pixel_ptr = (game->mlx->addr + (x_screen * game->mlx->bpp / 8) + (y_screen * game->mlx->size_line));
 	//Drawing ceiling
 	while (y_screen < wall_start)
@@ -90,38 +128,5 @@ void	render(t_game *game, int x_screen, int wall_height)
 		pixel_ptr += game->mlx->size_line;
 		y_screen++;
 	}
+	render_gun(game, x_screen);
 }
-
-/* #include "../../includes/cub3d.h"
-
-void	render(t_game *game)
-{
-	ft_printf(1, "Rendering\n");
-	ft_printf(1, "		Drawing ceiling and floor\n");
-	int	x_screen;
-	int	y_screen;
-	unsigned int	*pixel_ptr;
-	
-	y_screen = 0;
-	while (y_screen < SCREEN_HEIGHT)
-	{
-		pixel_ptr = (unsigned int *) (game->mlx->addr + (y_screen * game->mlx->size_line));
-		x_screen = 0;
-		while (x_screen < SCREEN_WIDTH)
-		{
-			if (x_screen != 0)
-				pixel_ptr++;
-			if (y_screen < SCREEN_HEIGHT / 2)
-				*pixel_ptr = game->map->floor_color_hex;
-			else
-				*pixel_ptr = game->map->ceiling_color_hex;
-			x_screen++;
-		}
-		y_screen++;
-	}
-	mlx_put_image_to_window(game->mlx->connection, game->mlx->win, game->mlx->img_to_render, 0 , 0);
-	ft_printf(1, "		Drawing walls\n");
-	ft_printf(1, "		Drawing textures\n");
-	ft_printf(1, "		Updating window\n");
-	ft_printf(1, "Rendering complete\n\n");
-} */

@@ -118,5 +118,4 @@ void	raycasting(t_game *game)
 	}
 	ft_printf(1, "		Updating window\n");
 	mlx_put_image_to_window(game->mlx->connection, game->mlx->win, game->mlx->img_to_render, 0 , 0);
-	mlx_put_image_to_window(game->mlx->connection, game->mlx->win, game->gun.img, 300, 300);
 }

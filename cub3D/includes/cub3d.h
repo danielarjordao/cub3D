@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/11 11:43:33 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/12 21:14:02 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct s_game
 # define VERTICAL 1
 # define HORIZONTAL 2
 # define DELTA_MOV 0.1
-# define ROTATE_ANGLE 10
+# define ROTATE_ANGLE 8
 # define TEXTURE_WIDTH 256
 # define TEXTURE_HEIGHT 256
 
@@ -200,6 +200,9 @@ void	start_game(t_game *game);
 /* handle_events.c */
 void	handle_events(t_game *game);
 
+/* handle_events.c */
+void	change_player_position(t_game *game);
+
 /* ****************************** RAYCASTING ******************************** */
 
 /* raycasting.c */
@@ -216,7 +219,6 @@ void	check_mem(t_game *game, t_list **ptr_or_matrix_list, \
 	void *ptr, char *error_msg);
 void	destroy_free_exit_error(t_game *game, char *error_msg);
 void	call_destroy_functions(t_game *game);
-void	free_all(t_mem_alloc *mem_allocation);
 
 /* free_mem.c */
 void	free_mem(void);
@@ -225,7 +227,7 @@ void	free_map(t_map *map);
 /* utils.c */
 bool	msg_error(t_error err);
 bool	msg_error2(t_error err);
-void	*xpm_to_image(t_game *game, char *filename);
+void	xpm_to_image(t_game *game, t_texture *texture, char *filename);
 int		close_game(t_game *game);
 
 #endif

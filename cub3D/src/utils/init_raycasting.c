@@ -38,6 +38,6 @@ void	init_raycasting(t_game *game)
 	printf("			x = %f, y = %f\n", game->map->player_dir_x, game->map->player_dir_y);
 	ft_printf(1, "			Setting player position\n");
 	init_player_position(game);
-	printf("			pos_x = %f\n" , game->map->player_x);
+	printf("			pos_x = %f\n", game->map->player_x);
 	printf("			pos_y = %f\n", game->map->player_y);
 }

@@ -18,12 +18,12 @@ ft_lstadd_front.c ft_lstadd_back.c \
 ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
 ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstadd_string_ordered.c \
 ft_lstsize.c ft_free_ptr_buffer.c ft_save_pointer.c ft_free_exit_error.c \
-ft_check_mem_alloc.c ft_free_matrix.c
+ft_check_mem_alloc.c ft_free_matrix.c ft_free_t_mem_alloc.c
 SRCS_PRINTF=ft_printf.c ft_print_p_fd.c \
 ft_printnbr_fd.c ft_print_s_c_fd.c ft_printnbr_base_fd.c
 SRCS_GET_NEXT_LINE=get_next_line.c
 SRCS_NAMES=$(SRCS_LIBFT) $(SRCS_PRINTF) $(SRCS_GET_NEXT_LINE)
-SCR=$(addprefix $(SRC_PATH), $(SRCS_NAMES))
+SRCS=$(addprefix $(SRC_PATH), $(SRCS_NAMES))
 OBJ_PATH=build/
 OBJS_NAMES=$(SRCS_NAMES:.c=.o)
 OBJS=$(addprefix $(OBJ_PATH), $(OBJS_NAMES))
@@ -33,14 +33,13 @@ RM=rm -f
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	@echo "Compiling libft.a..."
 	$(AR) $(ARFLAGS) $@ $?
+	@echo "✔️ libft.a compiled successfully"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	mkdir -p $(OBJ_PATH)
 	$(CC) $(CCFLAGS) -c $< -o $@ $(INCLUDE)
-
-msg:
-	@echo "\033[1;34m📚 Generating static library... Consolidating knowledge into blocks! 🏗️\033[0m"
 
 clean:
 	$(RM) $(OBJS)

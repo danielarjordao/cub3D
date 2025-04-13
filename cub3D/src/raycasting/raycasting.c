@@ -16,26 +16,20 @@ void	calculate_ray_dir(t_game *game, int x_screen)
 	game->ray.dir_y = game->map->camera_y * fator + game->map->player_dir_y;
 }
 
-void	casting_each_ray(t_game *game, int x_screen)
+void	calculate_length_per_unity(t_game *game)
 {
-	//PEGAR O QUADRANTE QUE O RAIO SE ENCONTRA
-	game->ray.x_grid = (int)game->map->player_x;
-	game->ray.y_grid = (int)game->map->player_y;
-
-	calculate_ray_dir(game, x_screen);
-
-	//CALCULAR DISTANCIA PARA CRUZAR UMA UNIDADE DO EIXO X E Y
 	if (game->ray.dir_x == 0)
-		game->ray.length_per_x_unity = INT_MAX;
+	game->ray.length_per_x_unity = INT_MAX;
 	else
 		game->ray.length_per_x_unity = fabs(1 / game->ray.dir_x);
 	if (game->ray.dir_y == 0)
 		game->ray.length_per_y_unity = INT_MAX;
 	else
 		game->ray.length_per_y_unity = fabs(1 / game->ray.dir_y);
-	
-	//PEGAR DIRECAO DO RAIO E DIRECAO DO PLAYER PARA A LINHA DO GRID DO EIXO X E Y
-	//REVIEW -> e se a distancia der 0, ou seja está em cima da linha? transformo em 1?
+}
+
+void	calculate_magnitute_crossing_axis(t_game *game)
+{
 	if (game->ray.dir_x < 0)
 	{
 		game->ray.step_x = -1;
@@ -60,10 +54,10 @@ void	casting_each_ray(t_game *game, int x_screen)
 	}
 	else
 		game->ray.magnitude_crossing_y = INT_MAX;
-	//Incrementar raio ate bater em uma parede
-	//printf("magnitude_crossing_x = %f\n", game->ray.magnitude_crossing_x);
-	//printf("magnitude_crossing_y = %f\n", game->ray.magnitude_crossing_y);
-	
+}
+
+void	check_hit_grid(t_game *game)
+{
 	game->ray.hit_grid = NONE;
 	while (game->ray.hit_grid == NONE)
 	{
@@ -82,6 +76,21 @@ void	casting_each_ray(t_game *game, int x_screen)
 					game->ray.hit_grid = HORIZONTAL;
 		}
 	}
+}
+
+void	casting_each_ray(t_game *game, int x_screen)
+{
+	//PEGAR O QUADRANTE QUE O RAIO SE ENCONTRA
+	game->ray.x_grid = (int)game->map->player_x;
+	game->ray.y_grid = (int)game->map->player_y;
+	calculate_ray_dir(game, x_screen);
+	//CALCULAR DISTANCIA PARA CRUZAR UMA UNIDADE DO EIXO X E Y
+	calculate_length_per_unity(game);
+	//PEGAR DIRECAO DO RAIO E DIRECAO DO PLAYER PARA A LINHA DO GRID DO EIXO X E Y
+	//REVIEW -> e se a distancia der 0, ou seja está em cima da linha? transformo em 1?
+	//Incrementar raio ate bater em uma parede
+	calculate_magnitute_crossing_axis(game);
+	check_hit_grid(game);
 	if (game->ray.hit_grid == VERTICAL)
 		game->ray.perpWallDist = (game->ray.magnitude_crossing_x - game->ray.length_per_x_unity);
 	else

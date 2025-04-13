@@ -18,13 +18,13 @@ void	set_delta_mov(t_game *game, double *delta_mov_x, \
 	}
 	if (game->key_a == TRUE && game->key_d == FALSE)
 	{
-		*delta_mov_x = (DELTA_MOV * game->map->player_dir_y) / dir_magnitude;
-		*delta_mov_y = (DELTA_MOV * game->map->player_dir_x * (-1)) / dir_magnitude;
+		*delta_mov_x += (DELTA_MOV * game->map->player_dir_y) / dir_magnitude;
+		*delta_mov_y += (DELTA_MOV * game->map->player_dir_x * (-1)) / dir_magnitude;
 	}
 	else if (game->key_a == FALSE && game->key_d == TRUE)
 	{
-		*delta_mov_x = (DELTA_MOV * game->map->player_dir_y * (-1)) / dir_magnitude;
-		*delta_mov_y = (DELTA_MOV * game->map->player_dir_x) / dir_magnitude;
+		*delta_mov_x += (DELTA_MOV * game->map->player_dir_y * (-1)) / dir_magnitude;
+		*delta_mov_y += (DELTA_MOV * game->map->player_dir_x) / dir_magnitude;
 	}
 }
 
@@ -49,6 +49,8 @@ void	change_player_position(t_game *game)
 	double	delta_mov_x;
 	double	delta_mov_y;
 
+	delta_mov_x = 0.0;
+	delta_mov_y = 0.0;
 	set_delta_mov(game, &delta_mov_x, &delta_mov_y);
 	new_pos_x = game->map->player_x + 1.1 * delta_mov_x;
 	new_pos_y = game->map->player_y + 1.1 * delta_mov_y;

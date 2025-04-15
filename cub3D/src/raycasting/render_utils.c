@@ -20,7 +20,10 @@ int	get_y_pixel_position(t_game *game, int y_screen, int wall_start)
 	double	texture_to_wall_ratio;
 
 	relative_top_wall_y = y_screen - wall_start;
-	texture_to_wall_ratio = ((double)TEX_HEIGHT / game->ray.wall_height);
+	if (game->ray.wall_height == 0)
+		return (0);
+	else
+		texture_to_wall_ratio = ((double)TEX_HEIGHT / game->ray.wall_height);
 	if (game->ray.wall_height <= SCREEN_HEIGHT)
 		tex_y = (int)(relative_top_wall_y * texture_to_wall_ratio);
 	else
@@ -31,6 +34,8 @@ int	get_y_pixel_position(t_game *game, int y_screen, int wall_start)
 	}
 	if (tex_y >= TEX_HEIGHT)
 		tex_y = TEX_HEIGHT - 1;
+	else if (tex_y < 0)
+		tex_y = 0;
 	return (tex_y);
 }
 
@@ -45,5 +50,9 @@ int	get_x_pixel_position(t_game *game, double wall_x)
 		tex_x = TEX_WIDTH - tex_x - 1;
 	else if (game->ray.hit_grid == HORIZONTAL && game->ray.dir_y > 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
+	if (tex_x < 0)
+		tex_x = 0;
+	else if (tex_x >= TEX_WIDTH)
+		tex_x = TEX_WIDTH - 1;
 	return (tex_x);
 }

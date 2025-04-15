@@ -25,13 +25,19 @@ bool	init_map(t_map **map)
 	return (true);
 }
 
+//leak checked
 void	init_variables_game(t_game *game)
 {
 	errno = 0;
 	game->mem_alloc.ptr_mem_list = NULL;
 	game->mem_alloc.matrix_mem_list = NULL;
+	game->textures[NO].img = NULL;
+	game->textures[SO].img = NULL;
+	game->textures[EA].img = NULL;
+	game->textures[WE].img = NULL;
+	game->gun.img = NULL;
+	game->gun_fire.img = NULL;
 	game->mlx = ft_calloc(1, sizeof(t_mlx));
-	//REVIEW - TESTAR SE FALHAR
 	check_mem(game, &(game->mem_alloc.ptr_mem_list), \
 		game->mlx, "ft_calloc for connection failed");
 	game->mlx->connection = NULL;
@@ -44,8 +50,10 @@ void	init_variables_game(t_game *game)
 	game->key_d = FALSE;
 	game->key_left_arrow = FALSE;
 	game->key_right_arrow = FALSE;
+	game->shooting = FALSE;
 }
 
+//leak checked
 void	init_mlx(t_game *game)
 {
 	ft_printf(1, "		Initializing mlx\n");
@@ -64,9 +72,9 @@ void	init_mlx(t_game *game)
 		&(game->mlx->bpp), &(game->mlx->size_line), &(game->mlx->endian));
 	if (!(game->mlx->addr))
 		destroy_free_exit_error(game, "mlx_get_data_addr failed");
-	//REVIEW -> memoria verificada ate esse ponto
 }
 
+//leak checked
 void	init_textures(t_game *game)
 {
 	ft_printf(1, "		Initializing textures\n");
@@ -74,9 +82,11 @@ void	init_textures(t_game *game)
 	xpm_to_image(game, &game->textures[SO], game->map->so_texture);
 	xpm_to_image(game, &game->textures[EA], game->map->ea_texture);
 	xpm_to_image(game, &game->textures[WE], game->map->we_texture);
-	xpm_to_image(game, &game->gun, "textures/GLOCK_0001.xpm");
+	xpm_to_image(game, &game->gun, "textures/gun1.xpm");
+	xpm_to_image(game, &game->gun_fire, "textures/gun2.xpm");
 	if (game->textures[NO].img == NULL || game->textures[SO].img == NULL \
-		|| game->textures[EA].img == NULL || game->textures[WE].img == NULL)
+		|| game->textures[EA].img == NULL || game->textures[WE].img == NULL \
+		|| game->gun.img == NULL || game->gun_fire.img == NULL)
 		destroy_free_exit_error(game, "mlx_xpm_file_to_image failed");
 }
 

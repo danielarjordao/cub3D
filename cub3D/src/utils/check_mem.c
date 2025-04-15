@@ -17,19 +17,21 @@ void	if_not_null_destroy(t_game *game, void *img_ptr)
 
 void	call_destroy_functions(t_game *game)
 {
-	//TODO -> Destruir todas os ponteiros de imagens já criados
-	//if_not_null_destroy(game, game->image);
 	if_not_null_destroy(game, game->textures[NO].img);
 	if_not_null_destroy(game, game->textures[SO].img);
 	if_not_null_destroy(game, game->textures[WE].img);
 	if_not_null_destroy(game, game->textures[EA].img);
 	if_not_null_destroy(game, game->gun.img);
-	if (game->mlx->win != NULL)
-		mlx_destroy_image(game->mlx->connection, game->mlx->img_to_render);
-	if (game->mlx->win != NULL)
-		mlx_destroy_window(game->mlx->connection, game->mlx->win);
-	if (game->mlx->connection != NULL)
-		mlx_destroy_display(game->mlx->connection);
+	if_not_null_destroy(game, game->gun_fire.img);
+	if (game->mlx)
+	{
+		if (game->mlx->img_to_render != NULL)
+			mlx_destroy_image(game->mlx->connection, game->mlx->img_to_render);
+		if (game->mlx->win != NULL)
+			mlx_destroy_window(game->mlx->connection, game->mlx->win);
+		if (game->mlx->connection != NULL)
+			mlx_destroy_display(game->mlx->connection);
+	}
 }
 
 void	free_exit_error(t_mem_alloc *mem_allocation, \

@@ -6,7 +6,7 @@
 #    By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/04/13 18:50:56 by mde-souz         ###   ########.fr        #
+#    Updated: 2025/04/15 18:42:00 by mde-souz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS = src/main.c \
 		src/raycasting/raycasting_utils.c \
 		src/game/start_game.c \
 		src/game/handle_events.c \
-		src/game/move_player.c \
+		src/game/actions.c \
 		src/parse/prints.c
 OBJS_DIR = objs
 OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)

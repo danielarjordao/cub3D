@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/13 19:23:10 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:46:47 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "../lib/libft/include/libft.h"
 # include "../lib/minilibx/mlx.h"
 # include <math.h>
+# include <float.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 /* ******************************* STRUCTS ********************************** */
 
@@ -92,6 +95,7 @@ typedef struct s_game
 	t_mlx		*mlx;
 	t_texture	textures[4];
 	t_texture	gun;
+	t_texture	gun_fire;
 	t_mem_alloc	mem_alloc;
 	t_ray		ray;
 	int			key_w;
@@ -100,6 +104,7 @@ typedef struct s_game
 	int			key_d;
 	int			key_left_arrow;
 	int			key_right_arrow;
+	int			shooting;
 }	t_game;
 
 # ifndef VARIABLES
@@ -203,8 +208,10 @@ void	start_game(t_game *game);
 /* handle_events.c */
 void	handle_events(t_game *game);
 
-/* handle_events.c */
+/* actions.c */
 void	change_player_position(t_game *game);
+void	shooting(t_game *game, bool *refresh);
+void	rotate_player(t_game *game);
 
 /* ****************************** RAYCASTING ******************************** */
 

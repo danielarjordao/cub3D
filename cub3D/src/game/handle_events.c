@@ -1,35 +1,15 @@
 #include "../../includes/cub3d.h"
-#include <X11/keysym.h>
 
-void	rotate_player(t_game *game)
+int	handle_mouse_click(int button, int x, int y, void *param)
 {
-	double	radianos;
-	double	magnitude;
-	double	new_dir_x;
-	double	new_dir_y;
+	t_game	*game;
 
-	printf("Move_player function");
-	radianos = ROTATE_ANGLE * M_PI / 180.0;
-	if (game->key_left_arrow == FALSE && game->key_right_arrow == TRUE)
-	{
-		new_dir_x = cos(radianos) * game->map->player_dir_x - \
-			sin(radianos) * game->map->player_dir_y;
-		new_dir_y = sin(radianos) * game->map->player_dir_x + \
-			cos(radianos) * game->map->player_dir_y;
-	}
-	else if (game->key_left_arrow == TRUE && game->key_right_arrow == FALSE)
-	{
-		new_dir_x = cos(-radianos) * game->map->player_dir_x - \
-			sin(-radianos) * game->map->player_dir_y;
-		new_dir_y = sin(-radianos) * game->map->player_dir_x + \
-			cos(-radianos) * game->map->player_dir_y;
-	}
-	else
-		return ;
-	// Normalizar o vetor de direção
-	magnitude = sqrt(new_dir_x * new_dir_x + new_dir_y * new_dir_y);
-	game->map->player_dir_x = new_dir_x / magnitude;
-	game->map->player_dir_y = new_dir_y / magnitude;
+	game = (t_game *)param;
+	(void) x;
+	(void) y;
+	if (button == Button1)
+		game->shooting = TRUE;
+	return (EXIT_SUCCESS);
 }
 
 int	handle_key(int key_code, void *param)
@@ -61,8 +41,7 @@ int	handle_pressed_key(void *param)
 	static int	count;
 	bool		refresh;
 
-	count++;
-	if (count != 7000)
+	if (++count != 7000)
 		return (EXIT_SUCCESS);
 	refresh = FALSE;
 	game = (t_game *)param;
@@ -77,6 +56,8 @@ int	handle_pressed_key(void *param)
 		rotate_player(game);
 		refresh = TRUE;
 	}
+	if (game->shooting == TRUE)
+		shooting(game, &refresh);
 	count = 0;
 	if (refresh == TRUE)
 		raycasting(game);
@@ -110,5 +91,6 @@ void	handle_events(t_game *game)
 	mlx_hook(game->mlx->win, 17, (1L << 17), close_game, game);
 	mlx_hook(game->mlx->win, 2, (1L << 0), handle_key, game);
 	mlx_hook(game->mlx->win, 3, (1L << 1), handle_keyrelease, game);
+	mlx_mouse_hook(game->mlx->win, handle_mouse_click, game);
 	mlx_loop_hook(game->mlx->connection, handle_pressed_key, game);
 }

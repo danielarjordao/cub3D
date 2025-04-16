@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/15 18:46:47 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/16 21:54:18 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_game
 	int			key_left_arrow;
 	int			key_right_arrow;
 	int			shooting;
+	int			delta_x_mouse;
 }	t_game;
 
 # ifndef VARIABLES
@@ -212,6 +213,13 @@ void	handle_events(t_game *game);
 void	change_player_position(t_game *game);
 void	shooting(t_game *game, bool *refresh);
 void	rotate_player(t_game *game);
+
+/* actions_utils.c */
+void	set_player_dir(t_game *game, double new_dir_x, double new_dir_y);
+
+/* mouse_functions.c */
+int		mouse_hook(int x, int y, t_game *game);
+int		handle_mouse_click(int button, int x, int y, void *param);
 
 /* ****************************** RAYCASTING ******************************** */
 

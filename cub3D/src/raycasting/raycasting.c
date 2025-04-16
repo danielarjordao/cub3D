@@ -67,6 +67,7 @@ void	raycasting(t_game *game)
 		x_screen++;
 	}
 	ft_printf(1, "		Updating window\n");
+	mlx_mouse_move(game->mlx->connection, game->mlx->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_put_image_to_window(game->mlx->connection, \
 		game->mlx->win, game->mlx->img_to_render, 0, 0);
 }

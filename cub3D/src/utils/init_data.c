@@ -51,6 +51,7 @@ void	init_variables_game(t_game *game)
 	game->key_left_arrow = FALSE;
 	game->key_right_arrow = FALSE;
 	game->shooting = FALSE;
+	game->delta_x_mouse = 0;
 }
 
 //leak checked

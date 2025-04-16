@@ -66,20 +66,19 @@ void	change_player_position(t_game *game)
 void	rotate_player(t_game *game)
 {
 	double	radianos;
-	double	magnitude;
 	double	new_dir_x;
 	double	new_dir_y;
 
 	printf("Move_player function");
 	radianos = ROTATE_ANGLE * M_PI / 180.0;
-	if (game->key_left_arrow == FALSE && game->key_right_arrow == TRUE)
+	if ((!game->key_left_arrow && game->key_right_arrow) || game->delta_x_mouse > 0)
 	{
 		new_dir_x = cos(radianos) * game->map->player_dir_x - \
 			sin(radianos) * game->map->player_dir_y;
 		new_dir_y = sin(radianos) * game->map->player_dir_x + \
 			cos(radianos) * game->map->player_dir_y;
 	}
-	else if (game->key_left_arrow == TRUE && game->key_right_arrow == FALSE)
+	else if ((game->key_left_arrow == TRUE && game->key_right_arrow == FALSE) || game->delta_x_mouse < 0)
 	{
 		new_dir_x = cos(-radianos) * game->map->player_dir_x - \
 			sin(-radianos) * game->map->player_dir_y;
@@ -88,10 +87,7 @@ void	rotate_player(t_game *game)
 	}
 	else
 		return ;
-	// Normalizar o vetor de direção
-	magnitude = sqrt(new_dir_x * new_dir_x + new_dir_y * new_dir_y);
-	game->map->player_dir_x = new_dir_x / magnitude;
-	game->map->player_dir_y = new_dir_y / magnitude;
+	set_player_dir(game, new_dir_x, new_dir_y);
 }
 
 void	shooting(t_game *game, bool *refresh)

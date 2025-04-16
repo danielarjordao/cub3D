@@ -1,17 +1,5 @@
 #include "../../includes/cub3d.h"
 
-int	handle_mouse_click(int button, int x, int y, void *param)
-{
-	t_game	*game;
-
-	game = (t_game *)param;
-	(void) x;
-	(void) y;
-	if (button == Button1)
-		game->shooting = TRUE;
-	return (EXIT_SUCCESS);
-}
-
 int	handle_key(int key_code, void *param)
 {
 	t_game	*game;
@@ -51,17 +39,17 @@ int	handle_pressed_key(void *param)
 		change_player_position(game);
 		refresh = TRUE;
 	}
-	if (game->key_left_arrow == TRUE || game->key_right_arrow == TRUE)
+	if (game->key_left_arrow == TRUE || game->key_right_arrow == TRUE \
+		|| game->delta_x_mouse != 0)
 	{
 		rotate_player(game);
 		refresh = TRUE;
 	}
 	if (game->shooting == TRUE)
 		shooting(game, &refresh);
-	count = 0;
 	if (refresh == TRUE)
 		raycasting(game);
-	return (EXIT_SUCCESS);
+	return (count = 0, EXIT_SUCCESS);
 }
 
 int	handle_keyrelease(int key_code, void *param)
@@ -88,9 +76,10 @@ int	handle_keyrelease(int key_code, void *param)
 void	handle_events(t_game *game)
 {
 	ft_printf(1, "Handling events\n\n");
-	mlx_hook(game->mlx->win, 17, (1L << 17), close_game, game);
-	mlx_hook(game->mlx->win, 2, (1L << 0), handle_key, game);
-	mlx_hook(game->mlx->win, 3, (1L << 1), handle_keyrelease, game);
+	mlx_hook(game->mlx->win, DestroyNotify, StructureNotifyMask, close_game, game);
+	mlx_hook(game->mlx->win, KeyPress, KeyPressMask, handle_key, game);
+	mlx_hook(game->mlx->win, KeyRelease, KeyReleaseMask, handle_keyrelease, game);
+	mlx_hook(game->mlx->win, MotionNotify, PointerMotionMask, mouse_hook, game);
 	mlx_mouse_hook(game->mlx->win, handle_mouse_click, game);
 	mlx_loop_hook(game->mlx->connection, handle_pressed_key, game);
 }

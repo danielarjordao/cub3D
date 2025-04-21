@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 19:46:53 by mde-souz          #+#    #+#             */
+/*   Updated: 2025/04/21 19:46:54 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 bool	msg_error(t_error err)
@@ -57,7 +69,7 @@ void	xpm_to_image(t_game *game, t_texture *texture, char *filename)
 		destroy_free_exit_error(game, "mlx_xpm_file_to_image failed");
 	if (width != TEX_WIDTH || heigth != TEX_HEIGHT)
 	{
-		mlx_destroy_image(game->mlx, ptr_img);
+		mlx_destroy_image(game->mlx->connection, ptr_img);
 		destroy_free_exit_error(game, "The size of the img must be 256x256");
 	}
 	texture->img = ptr_img;

@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_events.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 19:45:51 by mde-souz          #+#    #+#             */
+/*   Updated: 2025/04/21 19:45:52 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 int	handle_key(int key_code, void *param)
 {
 	t_game	*game;
 
-	printf("Handle_key function %d\n", key_code);
 	game = (t_game *)param;
 	if (key_code == XK_w)
 		game->key_w = TRUE;
@@ -56,7 +67,6 @@ int	handle_keyrelease(int key_code, void *param)
 {
 	t_game	*game;
 
-	printf("handle_keyrelease function %d\n", key_code);
 	game = (t_game *)param;
 	if (key_code == XK_w)
 		game->key_w = FALSE;
@@ -75,7 +85,6 @@ int	handle_keyrelease(int key_code, void *param)
 
 void	handle_events(t_game *game)
 {
-	ft_printf(1, "Handling events\n\n");
 	mlx_hook(game->mlx->win, DestroyNotify, StructureNotifyMask, close_game, game);
 	mlx_hook(game->mlx->win, KeyPress, KeyPressMask, handle_key, game);
 	mlx_hook(game->mlx->win, KeyRelease, KeyReleaseMask, handle_keyrelease, game);

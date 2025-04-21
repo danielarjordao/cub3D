@@ -5,12 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/16 21:54:18 by mde-souz         ###   ########.fr       */
+/*   Created: 2025/04/21 19:14:29 by mde-souz          #+#    #+#             */
+/*   Updated: 2025/04/21 19:24:52 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -18,7 +16,6 @@
 # include "../lib/libft/include/libft.h"
 # include "../lib/minilibx/mlx.h"
 # include <math.h>
-# include <float.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 
@@ -37,8 +34,8 @@ typedef struct s_map
 	int		ceiling_color_hex;
 	int		map_width;
 	int		map_height;
-	double		player_x;
-	double		player_y;
+	double	player_x;
+	double	player_y;
 	char	player_dir;
 	double	player_dir_x;
 	double	player_dir_y;
@@ -68,7 +65,6 @@ typedef struct s_texture
 	int		endian;
 }	t_texture;
 
-
 typedef struct s_ray
 {
 	int		raycaster;
@@ -78,13 +74,13 @@ typedef struct s_ray
 	double	length_per_y_unity;
 	double	magnitude_crossing_x;
 	double	magnitude_crossing_y;
-	double	perpWallDist;
-	int	step_x;
-	int	step_y;
-	int	x_grid;
-	int	y_grid;
-	int	wall_height;
-	int	hit_grid;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		x_grid;
+	int		y_grid;
+	int		wall_height;
+	int		hit_grid;
 }	t_ray;
 
 /* ******************************* DEFINES ********************************** */
@@ -147,114 +143,114 @@ typedef enum orientation
 	SO,
 	EA,
 	WE
-}	t_orientation;
+}	t_orient;
 
 /* ****************************** INIT_FUNCTIONS **************************** */
 
 /* init_data.c */
-bool	init_map(t_map **map);
-void	init_game(t_game *game);
-void	init_mlx(t_game *game);
-void	init_textures(t_game *game);
-void	init_raycasting(t_game *game);
+bool		init_map(t_map **map);
+void		init_game(t_game *game);
+void		init_mlx(t_game *game);
+void		init_textures(t_game *game);
+void		init_raycasting(t_game *game);
 
 /* ******************************** PARSE *********************************** */
 
 /* parse.c */
-bool	parse(char *file, t_map **map);
-bool	is_valid_extension(char *file, char *ext);
-bool	is_content_valid(int fd, t_map **map);
-bool	is_line_valid(char *line, t_map **map);
-bool	check_content(t_map *map);
+bool		parse(char *file, t_map **map);
+bool		is_valid_extension(char *file, char *ext);
+bool		is_content_valid(int fd, t_map **map);
+bool		is_line_valid(char *line, t_map **map);
+bool		check_content(t_map *map);
 
 /* parse_textures.c */
-bool	is_a_texture(char *line);
-bool	is_texture_valid(char *line, t_map **map);
-bool	add_texture(char *line, char c, t_map **map);
+bool		is_a_texture(char *line);
+bool		is_texture_valid(char *line, t_map **map);
+bool		add_texture(char *line, char c, t_map **map);
 
 /* parse_colors.c */
-bool	is_a_color(char *line);
-bool	is_color_valid(char *line, t_map **map);
-bool	add_color(char **temp, int *color, t_map **map);
-bool	valid_number_format(char *str);
-void	convert_rgb_to_hex(int *color, t_map **map);
+bool		is_a_color(char *line);
+bool		is_color_valid(char *line, t_map **map);
+bool		add_color(char **temp, int *color, t_map **map);
+bool		valid_number_format(char *str);
+void		convert_rgb_to_hex(int *color, t_map **map);
 
 /* parse_map.c */
-bool	is_map_valid(char *line, t_map **map);
-bool	are_colors_and_textures_set(t_map **map);
-void	add_map_line(char *line, t_map **map);
+bool		is_map_valid(char *line, t_map **map);
+bool		are_colors_and_textures_set(t_map **map);
+void		add_map_line(char *line, t_map **map);
 
 /* parse_map2.c */
-bool	check_empty_lines_in_map(t_map *map);
-bool	check_borders(t_map *map);
-char	**copy_map(t_map *map);
-bool	recursively_check_borders(t_map *map, char **temp_map, int x, int y);
+bool		check_empty_lines_in_map(t_map *map);
+bool		check_borders(t_map *map);
+char		**copy_map(t_map *map);
+bool		recursively_check_borders(t_map *map, char **temp_map, \
+	int x, int y);
 
 /* parse_utils.c */
-int		ignore_spaces(char *line);
-bool	is_empty_line(char *line);
-char	*ft_trim_spaces(char *line);
-void	clean_extra_empty_lines(t_map *map, int i);
-bool	check_null_line(t_map *map, int i, int j);
+int			ignore_spaces(char *line);
+bool		is_empty_line(char *line);
+char		*ft_trim_spaces(char *line);
+void		clean_extra_empty_lines(t_map *map, int i);
+bool		check_null_line(t_map *map, int i, int j);
 
 /* print.c */
-void	print_map(t_map *map);
-void	print_map2(t_map *map);
+void		print_map(t_map *map);
+void		print_map2(t_map *map);
 
 /* ******************************** GAME ************************************ */
 
 /* start_game.c */
-void	start_game(t_game *game);
+void		start_game(t_game *game);
 
 /* handle_events.c */
-void	handle_events(t_game *game);
+void		handle_events(t_game *game);
 
 /* actions.c */
-void	change_player_position(t_game *game);
-void	shooting(t_game *game, bool *refresh);
-void	rotate_player(t_game *game);
+void		change_player_position(t_game *game);
+void		shooting(t_game *game, bool *refresh);
+void		rotate_player(t_game *game);
 
 /* actions_utils.c */
-void	set_player_dir(t_game *game, double new_dir_x, double new_dir_y);
+void		set_player_dir(t_game *game, double new_dir_x, double new_dir_y);
 
 /* mouse_functions.c */
-int		mouse_hook(int x, int y, t_game *game);
-int		handle_mouse_click(int button, int x, int y, void *param);
+int			mouse_hook(int x, int y, t_game *game);
+int			handle_mouse_click(int button, int x, int y, void *param);
 
 /* ****************************** RAYCASTING ******************************** */
 
 /* raycasting.c */
-void	raycasting(t_game *game);
+void		raycasting(t_game *game);
 
 /* raycasting_utils.c */
-void	calculate_magnitute_crossing_axis(t_game *game);
-void	check_hit_grid(t_game *game);
+void		calculate_magnitute_crossing_axis(t_game *game);
+void		check_hit_grid(t_game *game);
 
 /* render.c */
-void	render(t_game *game, int x_screen, int wall_height);
+void		render(t_game *game, int x_screen, int wall_height);
 
 /* render_utils.c */
-t_orientation	get_texture_orientation(t_game *game);
-int	get_x_pixel_position(t_game *game, double wall_x);
-int	get_y_pixel_position(t_game *game, int y_screen, int wall_start);
-
+t_orient	get_texture_orientation(t_game *game);
+int			get_x_pixel_position(t_game *game, double wall_x);
+int			get_y_pixel_position(t_game *game, int y_screen, int wall_start);
 
 /* ******************************* UTILS *********************************** */
 
 /* check_mem.c */
-void	check_mem(t_game *game, t_list **ptr_or_matrix_list, \
+void		check_mem(t_game *game, t_list **ptr_or_matrix_list, \
 	void *ptr, char *error_msg);
-void	destroy_free_exit_error(t_game *game, char *error_msg);
-void	call_destroy_functions(t_game *game);
+void		destroy_free_exit_error(t_game *game, char *error_msg);
+void		call_destroy_functions(t_game *game);
 
 /* free_mem.c */
-void	free_mem(void);
-void	free_map(t_map *map);
+void		free_mem(void);
+void		free_map(t_map *map);
 
 /* utils.c */
-bool	msg_error(t_error err);
-bool	msg_error2(t_error err);
-void	xpm_to_image(t_game *game, t_texture *texture, char *filename);
-int		close_game(t_game *game);
+bool		msg_error(t_error err);
+bool		msg_error2(t_error err);
+void		xpm_to_image(t_game *game, t_texture *texture, char *filename);
+int			close_game(t_game *game);
 
 #endif

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 19:46:19 by mde-souz          #+#    #+#             */
+/*   Updated: 2025/04/21 19:46:20 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-t_orientation	get_texture_orientation(t_game *game)
+t_orient	get_texture_orientation(t_game *game)
 {
 	if (game->ray.hit_grid == VERTICAL && game->ray.dir_x > 0)
 		return (WE);

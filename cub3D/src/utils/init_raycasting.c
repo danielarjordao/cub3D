@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_raycasting.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 19:46:47 by mde-souz          #+#    #+#             */
+/*   Updated: 2025/04/21 19:46:48 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 void	init_player_direction(t_game *game)
@@ -32,12 +44,6 @@ void	init_player_position(t_game *game)
 
 void	init_raycasting(t_game *game)
 {
-	ft_printf(1, "		Initializing raycasting\n");
-	ft_printf(1, "			Setting player view direction, %c\n", game->map->player_dir);
 	init_player_direction(game);
-	printf("			x = %f, y = %f\n", game->map->player_dir_x, game->map->player_dir_y);
-	ft_printf(1, "			Setting player position\n");
 	init_player_position(game);
-	printf("			pos_x = %f\n", game->map->player_x);
-	printf("			pos_y = %f\n", game->map->player_y);
 }

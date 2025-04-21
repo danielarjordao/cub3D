@@ -1,12 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start_game.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 19:36:59 by mde-souz          #+#    #+#             */
+/*   Updated: 2025/04/21 19:37:00 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 void	start_game(t_game *game)
 {
-	ft_printf(1, "Initializing structures\n");
 	init_game(game);
-	ft_printf(1, "Structures initialized\n\n");
 	raycasting(game);
 	handle_events(game);
-	ft_printf(1, "Starting game loop\n\n");
 	mlx_loop(game->mlx->connection);
 }

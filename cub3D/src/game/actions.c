@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 19:45:48 by mde-souz          #+#    #+#             */
+/*   Updated: 2025/04/21 19:45:49 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 void	set_delta_mov(t_game *game, double *delta_mov_x, \
@@ -60,7 +72,6 @@ void	change_player_position(t_game *game)
 		game->map->player_x = new_pos_x;
 		game->map->player_y = new_pos_y;
 	}
-	printf("Player moved, the new pos_x is %f and pos_y is %f\n", game->map->player_x, game->map->player_y);
 }
 
 void	rotate_player(t_game *game)
@@ -69,7 +80,6 @@ void	rotate_player(t_game *game)
 	double	new_dir_x;
 	double	new_dir_y;
 
-	printf("Move_player function");
 	radianos = ROTATE_ANGLE * M_PI / 180.0;
 	if ((!game->key_left_arrow && game->key_right_arrow) || game->delta_x_mouse > 0)
 	{

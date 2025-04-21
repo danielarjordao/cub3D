@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:56:22 by dramos-j          #+#    #+#             */
-/*   Updated: 2025/03/24 13:01:52 by dramos-j         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:33:57 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ bool	parse(char *file, t_map **map)
 		free_map(*map);
 		return (false);
 	}
-	print_map(*map);
 	return (true);
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 19:46:40 by mde-souz          #+#    #+#             */
+/*   Updated: 2025/04/21 19:46:41 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 bool	init_map(t_map **map)
@@ -57,7 +69,6 @@ void	init_variables_game(t_game *game)
 //leak checked
 void	init_mlx(t_game *game)
 {
-	ft_printf(1, "		Initializing mlx\n");
 	game->mlx->connection = mlx_init();
 	check_mem(game, &(game->mem_alloc.ptr_mem_list), \
 			game->mlx->connection, "Mlx_init failed");
@@ -78,7 +89,6 @@ void	init_mlx(t_game *game)
 //leak checked
 void	init_textures(t_game *game)
 {
-	ft_printf(1, "		Initializing textures\n");
 	xpm_to_image(game, &game->textures[NO], game->map->no_texture);
 	xpm_to_image(game, &game->textures[SO], game->map->so_texture);
 	xpm_to_image(game, &game->textures[EA], game->map->ea_texture);
@@ -93,7 +103,6 @@ void	init_textures(t_game *game)
 
 void	init_game(t_game *game)
 {
-	ft_printf(1, "		Initializing functions game\n");
 	init_variables_game(game);
 	init_mlx(game);
 	init_textures(game);

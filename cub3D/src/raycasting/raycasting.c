@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 19:46:12 by mde-souz          #+#    #+#             */
+/*   Updated: 2025/04/21 19:46:13 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 void	set_camera_plane(t_game *game)
@@ -43,22 +55,19 @@ void	casting_each_ray(t_game *game, int x_screen)
 	calculate_magnitute_crossing_axis(game);
 	check_hit_grid(game);
 	if (game->ray.hit_grid == VERTICAL)
-		game->ray.perpWallDist = \
+		game->ray.perp_wall_dist = \
 			(game->ray.magnitude_crossing_x - game->ray.length_per_x_unity);
 	else
-		game->ray.perpWallDist = \
+		game->ray.perp_wall_dist = \
 			(game->ray.magnitude_crossing_y - game->ray.length_per_y_unity);
-	game->ray.wall_height = (int)(SCREEN_HEIGHT / game->ray.perpWallDist);
+	game->ray.wall_height = (int)(SCREEN_HEIGHT / game->ray.perp_wall_dist);
 }
 
 void	raycasting(t_game *game)
 {
 	int	x_screen;
 
-	ft_printf(1, "Starting raycasting\n");
-	ft_printf(1, "		Save player position and direction\n");
 	set_camera_plane(game);
-	ft_printf(1, "		Calculate ray direction\n");
 	x_screen = 0;
 	while (x_screen < SCREEN_WIDTH)
 	{
@@ -66,7 +75,6 @@ void	raycasting(t_game *game)
 		render(game, x_screen, game->ray.wall_height);
 		x_screen++;
 	}
-	ft_printf(1, "		Updating window\n");
 	mlx_mouse_move(game->mlx->connection, game->mlx->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_put_image_to_window(game->mlx->connection, \
 		game->mlx->win, game->mlx->img_to_render, 0, 0);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 19:46:24 by mde-souz          #+#    #+#             */
+/*   Updated: 2025/04/21 19:46:24 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 unsigned int	get_pixel_from_texture(t_game *game, \
@@ -7,13 +19,13 @@ unsigned int	get_pixel_from_texture(t_game *game, \
 	int				tex_x;
 	unsigned int	*pixel_from_texture;
 	double			wall_x;
-	t_orientation	tex_orientation;
+	t_orient	tex_orientation;
 
 	//De acordo com o grid atingido calcula o ponto x to choque
 	if (game->ray.hit_grid == VERTICAL)
-		wall_x = game->map->player_y + game->ray.perpWallDist * game->ray.dir_y;
+		wall_x = game->map->player_y + game->ray.perp_wall_dist * game->ray.dir_y;
 	else
-		wall_x = game->map->player_x + game->ray.perpWallDist * game->ray.dir_x;
+		wall_x = game->map->player_x + game->ray.perp_wall_dist * game->ray.dir_x;
 	// Pega apenas a parte fracionária desta coordenada.
 	// Isto dá a posição X relativa dentro da célula da parede.
 	wall_x -= floor(wall_x);

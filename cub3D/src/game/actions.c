@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 19:45:48 by mde-souz          #+#    #+#             */
-/*   Updated: 2025/04/21 19:45:49 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:50:23 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,17 @@ void	rotate_player(t_game *game)
 	double	new_dir_y;
 
 	radianos = ROTATE_ANGLE * M_PI / 180.0;
-	if ((!game->key_left_arrow && game->key_right_arrow) || game->delta_x_mouse > 0)
+	if ((!game->key_left_arrow && game->key_right_arrow) \
+		|| game->delta_x_mouse > 0)
 	{
 		new_dir_x = cos(radianos) * game->map->player_dir_x - \
 			sin(radianos) * game->map->player_dir_y;
 		new_dir_y = sin(radianos) * game->map->player_dir_x + \
 			cos(radianos) * game->map->player_dir_y;
 	}
-	else if ((game->key_left_arrow == TRUE && game->key_right_arrow == FALSE) || game->delta_x_mouse < 0)
+	else if ((game->key_left_arrow == TRUE \
+		&& game->key_right_arrow == FALSE) \
+		|| game->delta_x_mouse < 0)
 	{
 		new_dir_x = cos(-radianos) * game->map->player_dir_x - \
 			sin(-radianos) * game->map->player_dir_y;

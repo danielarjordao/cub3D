@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 19:46:12 by mde-souz          #+#    #+#             */
-/*   Updated: 2025/04/21 19:46:13 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:51:12 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	raycasting(t_game *game)
 		render(game, x_screen, game->ray.wall_height);
 		x_screen++;
 	}
-	mlx_mouse_move(game->mlx->connection, game->mlx->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	mlx_mouse_move(game->mlx->connection, game->mlx->win, \
+		SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_put_image_to_window(game->mlx->connection, \
 		game->mlx->win, game->mlx->img_to_render, 0, 0);
 }

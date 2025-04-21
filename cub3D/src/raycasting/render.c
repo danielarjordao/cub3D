@@ -19,13 +19,15 @@ unsigned int	get_pixel_from_texture(t_game *game, \
 	int				tex_x;
 	unsigned int	*pixel_from_texture;
 	double			wall_x;
-	t_orient	tex_orientation;
+	t_orient		tex_orientation;
 
 	//De acordo com o grid atingido calcula o ponto x to choque
 	if (game->ray.hit_grid == VERTICAL)
-		wall_x = game->map->player_y + game->ray.perp_wall_dist * game->ray.dir_y;
+		wall_x = game->map->player_y + \
+			game->ray.perp_wall_dist * game->ray.dir_y;
 	else
-		wall_x = game->map->player_x + game->ray.perp_wall_dist * game->ray.dir_x;
+		wall_x = game->map->player_x + \
+			game->ray.perp_wall_dist * game->ray.dir_x;
 	// Pega apenas a parte fracionária desta coordenada.
 	// Isto dá a posição X relativa dentro da célula da parede.
 	wall_x -= floor(wall_x);
@@ -45,15 +47,17 @@ void	copy_gun_pixel_to_screen(t_game *game, int gun_x_offset, \
 	int gun_y_offset, char	*pixel_screen_img)
 {
 	unsigned int	*pixel_from_texture;
-	
+	int				img_ratio;
+
+	img_ratio = TEX_WIDTH / (SCREEN_WIDTH / 3);
 	if (game->shooting == TRUE)
 		pixel_from_texture = (unsigned int *)((game->gun_fire.pixel_address \
-			+ (gun_x_offset) * TEX_WIDTH / (SCREEN_WIDTH / 3) * game->gun.bpp / 8) + \
-			((gun_y_offset) * TEX_WIDTH / (SCREEN_WIDTH / 3) * game->gun.size_line));
+			+ (gun_x_offset) * img_ratio * game->gun_fire.bpp / 8) + \
+			((gun_y_offset) * img_ratio * game->gun_fire.size_line));
 	else
 		pixel_from_texture = (unsigned int *)((game->gun.pixel_address \
-			+ (gun_x_offset) * TEX_WIDTH / (SCREEN_WIDTH / 3) * game->gun.bpp / 8) + \
-			((gun_y_offset) * TEX_WIDTH / (SCREEN_WIDTH / 3) * game->gun.size_line));
+			+ (gun_x_offset) * img_ratio * game->gun.bpp / 8) + \
+			((gun_y_offset) * img_ratio * game->gun.size_line));
 	// Calcula o endereço do pixel na imagem de renderização
 	// Copia o pixel para a imagem de renderização
 	if (*pixel_from_texture != 0xff000000)

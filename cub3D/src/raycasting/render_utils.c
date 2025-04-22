@@ -56,8 +56,6 @@ int	get_x_pixel_position(t_game *game, double wall_x)
 	int	tex_x;
 
 	tex_x = (int)(wall_x * (double)TEX_WIDTH);
-	// Verifica se precisas de inverter a coordenada X da textura
-	// (depende se estás a olhar para uma parede Este vs Oeste, ou Norte vs Sul)
 	if (game->ray.hit_grid == VERTICAL && game->ray.dir_x < 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
 	else if (game->ray.hit_grid == HORIZONTAL && game->ray.dir_y > 0)

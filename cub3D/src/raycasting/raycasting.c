@@ -43,15 +43,10 @@ void	calculate_length_per_unity(t_game *game)
 
 void	casting_each_ray(t_game *game, int x_screen)
 {
-	//PEGAR O QUADRANTE QUE O RAIO SE ENCONTRA
 	game->ray.x_grid = (int)game->map->player_x;
 	game->ray.y_grid = (int)game->map->player_y;
 	calculate_ray_dir(game, x_screen);
-	//CALCULAR DISTANCIA PARA CRUZAR UMA UNIDADE DO EIXO X E Y
 	calculate_length_per_unity(game);
-	//PEGAR DIRECAO DO RAIO E DIRECAO DO PLAYER PARA A LINHA DO GRID DO EIXO X E Y
-	//REVIEW -> e se a distancia der 0, ou seja está em cima da linha? transformo em 1?
-	//Incrementar raio ate bater em uma parede
 	calculate_magnitute_crossing_axis(game);
 	check_hit_grid(game);
 	if (game->ray.hit_grid == VERTICAL)

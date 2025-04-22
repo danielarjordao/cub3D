@@ -14,7 +14,6 @@
 
 bool	init_map(t_map **map)
 {
-	//REVIEW -> Trocar para calloc
 	*map = (t_map *)malloc(sizeof(t_map));
 	if (!*map)
 		return (msg_error(MALLOC_FAIL));

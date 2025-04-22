@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 19:45:51 by mde-souz          #+#    #+#             */
-/*   Updated: 2025/04/21 19:45:52 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/22 08:53:28 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,11 @@ int	handle_keyrelease(int key_code, void *param)
 
 void	handle_events(t_game *game)
 {
-	mlx_hook(game->mlx->win, DestroyNotify, StructureNotifyMask, close_game, game);
+	mlx_hook(game->mlx->win, DestroyNotify, StructureNotifyMask, \
+		close_game, game);
 	mlx_hook(game->mlx->win, KeyPress, KeyPressMask, handle_key, game);
-	mlx_hook(game->mlx->win, KeyRelease, KeyReleaseMask, handle_keyrelease, game);
+	mlx_hook(game->mlx->win, KeyRelease, KeyReleaseMask, \
+		handle_keyrelease, game);
 	mlx_hook(game->mlx->win, MotionNotify, PointerMotionMask, mouse_hook, game);
 	mlx_mouse_hook(game->mlx->win, handle_mouse_click, game);
 	mlx_loop_hook(game->mlx->connection, handle_pressed_key, game);

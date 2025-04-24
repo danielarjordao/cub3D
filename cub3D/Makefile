@@ -6,7 +6,7 @@
 #    By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 17:19:39 by dramos-j          #+#    #+#              #
-#    Updated: 2025/04/16 21:53:46 by mde-souz         ###   ########.fr        #
+#    Updated: 2025/04/24 17:15:51 by mde-souz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,7 @@ SRCS = src/main.c \
 		src/game/handle_events.c \
 		src/game/mouse_functions.c \
 		src/game/actions.c \
-		src/game/actions_utils.c \
-		src/parse/prints.c
+		src/game/actions_utils.c
 OBJS_DIR = objs
 OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
 RM = rm -rf

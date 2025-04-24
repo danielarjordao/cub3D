@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2025/04/12 19:00:46 by mde-souz         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:38:08 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,5 @@ void	ft_check_mem_alloc(t_mem_alloc *mem_allocation, \
 void	ft_free_matrix(void *matrix_void);
 void	ft_free_ptr_buffer(char **buffer, int size);
 void	ft_free_t_mem_alloc(t_mem_alloc *mem_allocation);
-
 
 #endif

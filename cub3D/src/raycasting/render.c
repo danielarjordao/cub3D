@@ -42,17 +42,19 @@ void	copy_gun_pixel_to_screen(t_game *game, int gun_x_offset, \
 	int gun_y_offset, char	*pixel_screen_img)
 {
 	unsigned int	*pixel_from_texture;
-	int				img_ratio;
 
-	img_ratio = TEX_WIDTH / (SCREEN_WIDTH / 3);
 	if (game->shooting == TRUE)
 		pixel_from_texture = (unsigned int *)((game->gun_fire.pixel_address \
-			+ (gun_x_offset) * img_ratio * game->gun_fire.bpp / 8) + \
-			((gun_y_offset) * img_ratio * game->gun_fire.size_line));
+			+ (gun_x_offset) * TEX_WIDTH / (SCREEN_WIDTH / 3) \
+			* game->gun_fire.bpp / 8) + \
+			((gun_y_offset) * TEX_WIDTH / (SCREEN_WIDTH / 3) \
+			* game->gun_fire.size_line));
 	else
 		pixel_from_texture = (unsigned int *)((game->gun.pixel_address \
-			+ (gun_x_offset) * img_ratio * game->gun.bpp / 8) + \
-			((gun_y_offset) * img_ratio * game->gun.size_line));
+			+ (gun_x_offset) * TEX_WIDTH / (SCREEN_WIDTH / 3) \
+			* game->gun.bpp / 8) + \
+			((gun_y_offset) * TEX_WIDTH / (SCREEN_WIDTH / 3) \
+			* game->gun.size_line));
 	if (*pixel_from_texture != 0xff000000)
 		*(unsigned int *)pixel_screen_img = *pixel_from_texture;
 }

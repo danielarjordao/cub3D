@@ -51,9 +51,9 @@ The program takes exactly one argument: the path to a valid .cub map file.
 | `ESC` / `X` icon   | Exit the game                |
 
 ### Map File Format (.cub)
-A valid .cub file contains:
+#### A valid .cub file contains:
 
-Texture paths for all four wall directions:
+##### Texture paths for all four wall directions:
 ```bash
 NO ./path_to_north_texture.xpm
 SO ./path_to_south_texture.xpm
@@ -62,27 +62,27 @@ EA ./path_to_east_texture.xpm
 ```
 Textures must be .xpm files, and must be 256×256 pixels.
 
-Floor and ceiling RGB colors:
+##### Floor and ceiling RGB colors:
 ```bash
 F 30,30,30
 C 200,200,255
 ```
 Values must be in the range 0–255.
 
-Map layout made of:
-- 1: wall
-- 0: empty space
-- N, S, E, W: player start position + direction
-- ' ' (space): empty, treated as out-of-bounds (only allowed outside the external wall border)
+##### Map layout made of:
+ - 1: wall
+ - 0: empty space
+ - N, S, E, W: player start position + direction
+ - ' ' (space): empty, treated as out-of-bounds (only allowed outside the external wall border)
 
-#### Map Rules
+###### Map Rules
 - The map must be enclosed entirely by walls (1).
 - Only one player start position is allowed.
 - The map must come last in the file.
 - Spaces ' ' are valid characters, but only outside the playable area (i.e., between outer walls).
 - You must handle misaligned maps and space-padding safely.
 
-Example .cub file
+##### Example .cub file
 ```bash
 NO ./textures/wall_north.xpm
 SO ./textures/wall_south.xpm

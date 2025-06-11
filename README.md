@@ -108,8 +108,8 @@ C 200,200,255
 ```
 
 ### Makefile Targets
-make / make all — Build the program
-make clean — Delete object files
-make fclean — Delete objects and executable
-make re — Rebuild everything
-make bonus — Compile with bonus features
+- `make` / `make all` — Build the program
+- `make clean` — Delete object files
+- `make fclean` — Delete objects and executable
+- `make re` — Rebuild everything
+- `make bonus` — Compile with bonus features

@@ -23,19 +23,20 @@ This project was developed in collaboration with my course mate [Murilo](https:/
 
 ## Installation
 
-### Clone the repository
+### Clone the repository:
 
 ```bash
 git clone git@github.com:danielarjordao/cub3D.git
 cd cub3D/cub3D
 ```
 
-### Compile the project
+### Compile the project:
 ```bash
 make
 ```
 
 ## Usage
+Run the program with the path to a valid .cub map file:
 ```bash
 ./cub3D maps/example.cub
 ```
@@ -69,7 +70,7 @@ C 200,200,255
 ```
 Values must be in the range 0–255.
 
-##### Map layout made of:
+##### Map Layout:
  - 1: wall
  - 0: empty space
  - N, S, E, W: player start position + direction

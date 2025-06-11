@@ -23,24 +23,15 @@ This project was developed in collaboration with my course mate [Murilo](https:/
 
 ## Installation
 
-> ⚠️ **MiniLibX is required but not bundled.** Install it manually before compiling.
-
 ### Clone the repository
 
 ```bash
 git clone git@github.com:danielarjordao/cub3D.git
-```
-
-### Install MiniLibX (for Linux)
-```bash
-cd cub3D/lib
-git clone https://github.com/42Paris/minilibx-linux.git minilibx
-sudo apt-get install libxext-dev libx11-dev
+cd cub3D/cub3D
 ```
 
 ### Compile the project
 ```bash
-cd ..
 make
 ```
 
